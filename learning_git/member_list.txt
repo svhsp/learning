@@ -2,8 +2,6 @@ Coach
 
 Robin
 
-Annie
-
 Hongxing is a git coach
 Hongxing plans to coach flutter
 
