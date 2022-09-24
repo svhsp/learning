@@ -1,9 +1,10 @@
 Coach
 
-Robin
+Annie
 
-Hongxing is a git coach
-Hongxing plans to coach flutter
+Hongxing is a git coach, he also plans to coach flutter.
+
+Robin
 
 Student
 
