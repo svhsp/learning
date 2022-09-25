@@ -1,20 +1,3 @@
-Coach
-
-Annie
-
-Hongxing is a git coach, he also plans to coach flutter.
-
-Robin(jevmors@gmail.com)
-
-Student
-
-Evan
-
-Adam
-
-Daniel
-
-Robinson(robinsonxiang123@gmail.com
-
+Only Evan
 
 
