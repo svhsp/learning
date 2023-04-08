@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "442445390482",
+    "project_id": "bosnia-d1a76",
+    "storage_bucket": "bosnia-d1a76.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:442445390482:android:5dcff0364a667291047c4b",
+        "android_client_info": {
+          "package_name": "com.example.mongles"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "442445390482-f5hinqap88oh7vvonvj1h49gt3chdnte.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBr7_leiGD6N6s9tTC8GOvPYVpzCYkJ3kk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "442445390482-f5hinqap88oh7vvonvj1h49gt3chdnte.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "442445390482-jllv6oqrvtngq6g1of864p8ro6bdfpic.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.mongles"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
