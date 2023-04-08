@@ -5,6 +5,9 @@ import 'package:login/pages/profileScreen.dart';
 import 'package:login/pages/registerScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:login/services/Services.dart';
+import 'package:login/services/Stockfetch.dart';
+import 'models/stock.dart';
 import 'pages/TickerScreen.dart';
 import 'firebase_options.dart';
 
@@ -15,11 +18,15 @@ String enteredUsername = '';
 String email = '';
 String age = '';
 
-
 void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  List<String> test = List.empty(growable: true);
+  test.add('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=GOOG&apikey=G4UJ9ECYT8N1K1O6');
+
+  FetchServices.getStockData(test);
 
   runApp(MyApp());
 }
