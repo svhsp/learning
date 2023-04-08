@@ -1,31 +1,3 @@
-main.dart
-import 'package:flutter/material.dart';
-import 'search_page.dart';
-import 'watchlist_page.dart';
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Stock Viewer App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => WatchListPage(),
-        '/search': (context) => SearchPage(),
-      },
-    );
-  }
-}
-
-
-search_page.dart
 import 'package:flutter/material.dart';
 import 'package:stock_tracker/watchlist_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -133,8 +105,8 @@ class _SearchPageState extends State<SearchPage> {
                     child: const Text('Add to Watchlist'),
                     onPressed: () async {
                       final supabase = SupabaseClient(
-                        'https://tuduixqbwmummppelbgt.supabase.co',
-                        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR1ZHVpeHFid211bW1wcGVsYmd0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODA4OTk3MzksImV4cCI6MTk5NjQ3NTczOX0.0I3hFGhrwYB8A5tpL78UW7JJJbvPRwLnfCvDwEzBMIE',
+                          'https://tuduixqbwmummppelbgt.supabase.co',
+                          String.fromEnvironment('SUPABASE_ANNON_KEY')
                       );
 
                       final response = await supabase.from('tickers').select().eq('name', _searchResult!['01. symbol']).execute();
@@ -160,7 +132,6 @@ class _SearchPageState extends State<SearchPage> {
                         }
                       }
                     },
-
                   ),
                 ],
               ),
@@ -168,123 +139,5 @@ class _SearchPageState extends State<SearchPage> {
         ),
       ),
     );
-  }
-}
-
-
-watchlist_page.dart
-import 'package:flutter/material.dart';
-import 'package:stock_tracker/api_request.dart';
-import 'package:supabase/supabase.dart';
-
-class WatchListPage extends StatefulWidget {
-  @override
-  _WatchListPageState createState() => _WatchListPageState();
-}
-class _WatchListPageState extends State<WatchListPage> {
-  final supabase = SupabaseClient(
-    'https://tuduixqbwmummppelbgt.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR1ZHVpeHFid211bW1wcGVsYmd0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODA4OTk3MzksImV4cCI6MTk5NjQ3NTczOX0.0I3hFGhrwYB8A5tpL78UW7JJJbvPRwLnfCvDwEzBMIE',
-  );
-
-  List<String> _tickerNames = [];
-  List<String> _tickerPrices = [];
-  List<String> _tickerChanges = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _loadTickerNames();
-  }
-
-  Future<void> _loadTickerNames() async {
-    final response = await supabase.from('tickers').select('name').execute();
-    if (response.status == 200) {
-      final tickerNames = response.data.cast<Map<String, dynamic>>().map((ticker) => ticker['name'].toString()).toList().cast<String>();
-      setState(() {
-        _tickerNames = tickerNames;
-        build(context);
-      });
-    } else {
-      // handle error
-    }
-  }
-
-
-  Future<void> _removeTicker(String ticker) async {
-    final response = await supabase.from('tickers').delete().eq('name', ticker).execute();
-    if (response.status != 200) {
-      // handle error
-    }
-    _loadTickerNames();
-  }
-
-  Future<void> _updateTickerPrice(String ticker) async {
-    final stockData = await fetchStockData(ticker);
-      //final response = await supabase.from('tickers').update({'price': stockData['05. price']}).eq('ticker', ticker).execute();
-      //if (response.status != 200) {
-        // handle error
-      //}
-      _loadTickerNames();
-  }
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Watch List'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {
-              Navigator.pushNamed(context, '/search');
-            },
-          ),
-        ],
-      ),
-      body: ListView.builder(
-        itemCount: _tickerNames.length,
-        itemBuilder: (context, index) {
-          _loadTickerNames();
-          final ticker = _tickerNames[index];
-          return ListTile(
-            title: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(ticker),
-              ],
-            ),
-            trailing: IconButton(
-              icon: const Icon(Icons.delete),
-              onPressed: () {
-                _removeTicker(ticker);
-              },
-            ),
-            onTap: () {
-              _updateTickerPrice(ticker);
-            },
-          );
-        },
-      ),
-
-    );
-  }
-}
-
-api_request.dart
-import 'dart:convert';
-
-import 'package:http/http.dart' as http;
-
-Future<Map<String, dynamic>> fetchStockData(String ticker) async {
-  final url =
-      'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=$ticker&apikey=G4UJ9ECYT8N1K1O6';
-  final response = await http.get(Uri.parse(url));
-  if (response.statusCode == 200) {
-    final jsonData = jsonDecode(response.body);
-    return jsonData['Global Quote'];
-  } else {
-    throw Exception('Failed to load stock data');
   }
 }
