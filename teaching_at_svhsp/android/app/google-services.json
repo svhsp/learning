@@ -1,0 +1,118 @@
+{
+  "project_info": {
+    "project_number": "30436198948",
+    "project_id": "svhsp-ee9ee",
+    "storage_bucket": "svhsp-ee9ee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:30436198948:android:7e8f5bd10c8e363e7066b1",
+        "android_client_info": {
+          "package_name": "com.example.firebase_demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "30436198948-m706kvd8tve25su4mhrl1epvp4jb3oni.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAe5Gc6q3Ox2ncJvY6rVsdhu32zHFxfoE4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "30436198948-m706kvd8tve25su4mhrl1epvp4jb3oni.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "30436198948-i7c22ffcv8k3i84muc1gkh8ff4r0ss6t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.stockApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:30436198948:android:d6b102671aeec99a7066b1",
+        "android_client_info": {
+          "package_name": "com.example.stock_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "30436198948-m706kvd8tve25su4mhrl1epvp4jb3oni.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAe5Gc6q3Ox2ncJvY6rVsdhu32zHFxfoE4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "30436198948-m706kvd8tve25su4mhrl1epvp4jb3oni.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "30436198948-i7c22ffcv8k3i84muc1gkh8ff4r0ss6t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.stockApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:30436198948:android:d796f28506c33ad97066b1",
+        "android_client_info": {
+          "package_name": "com.example.teaching_at_svhsp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "30436198948-m706kvd8tve25su4mhrl1epvp4jb3oni.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAe5Gc6q3Ox2ncJvY6rVsdhu32zHFxfoE4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "30436198948-m706kvd8tve25su4mhrl1epvp4jb3oni.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "30436198948-i7c22ffcv8k3i84muc1gkh8ff4r0ss6t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.stockApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
