@@ -18,13 +18,13 @@ void main() async {
   runApp(MaterialApp(
     title: "Hi",
 
-    initialRoute: '/createacc',
+    initialRoute: '/',
     routes: {
-      '/createacc': (context) => CreateAccount(),
+      // '/': (context) => CreateAccount(),
+      '/': (context) => StockListPage(),
       '/login': (context) => Login(),
       '/verify': (context) => Verification(),
       '/StockList': (context) => StockListPage(),
-      '/createacc': (context) => CreateAccount(),
 
     },
   ));

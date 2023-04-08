@@ -17,37 +17,35 @@ class StockListPage extends StatelessWidget {
         ),
 
       ),
-      body: Center(
-        child: FutureBuilder<List<Stock>>(
-          future: StockFetch.fetchStocks(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              if (snapshot.hasError) {
-                return Center(
-                  child: Text('Error: ${snapshot.error}'),
-                );
-              } else {
-                final stocks = snapshot.data!;
-                return ListView.builder(
-                  itemCount: stocks.length,
-                  itemBuilder: (context, index) {
-                    final stock = stocks[index];
-                    return StockCard(
-                      tickerName: stock.tickerName,
-                      company: stock.company,
-                      price: stock.price,
-                      change: stock.change,
-                    );
-                  },
-                );
-              }
-            } else {
+      body: FutureBuilder<List<Stock>>(
+        future: StockFetch.fetchStocks(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasError) {
               return Center(
-                child: CircularProgressIndicator(),
+                child: Text('Error: ${snapshot.error}'),
+              );
+            } else {
+              final stocks = snapshot.data!;
+              return ListView.builder(
+                itemCount: stocks.length,
+                itemBuilder: (context, index) {
+                  final stock = stocks[index];
+                  return StockCard(
+                    tickerName: stock.tickerName,
+                    company: stock.company,
+                    price: stock.price,
+                    change: stock.change,
+                  );
+                },
               );
             }
-          },
-        ),
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     );
   }

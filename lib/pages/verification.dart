@@ -1,12 +1,26 @@
 // Packages
 
 import 'dart:async';
+import 'package:learning/main.dart';
 import 'package:learning/pages/createacc.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:learning/pages/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:learning/pages/stock_list_page.dart';
+import 'package:flutter/material.dart';
+import 'package:learning/pages/verification.dart';
+import 'package:learning/pages/stock_list_page.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:learning/pages/firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:learning/pages/createacc.dart';
+import 'package:learning/pages/verification.dart';
+import 'package:learning/pages/login.dart';
 
 // class CreateAccount extends StatefulWidget {
 //   @override
@@ -86,9 +100,9 @@ class VerificationState extends State<Verification> {
                 Text("Email verified!"),
                 SizedBox(height: 30),
                 ElevatedButton(onPressed: () {
-                  FirebaseAuth.instance.signOut();
-                  Navigator.pop(context);
-                }, child: Text("Log Out")),
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => StockListPage()));
+                }, child: Text("Continue to Stock Watchlist")),
               ]
               : [
                 Text('Check your email\n\nWaiting for verification...\n\n'),
