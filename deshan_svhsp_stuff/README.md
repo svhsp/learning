@@ -1,4 +1,5 @@
 # teaching4svhsp
 
-start my github journey
-wefewfwefwefewfwefewfew
+I made the login, signup, ticker display, and the search ticker pages
+get real api calls in the services.dart 
+I have stock list page, TickerScreen.dart
