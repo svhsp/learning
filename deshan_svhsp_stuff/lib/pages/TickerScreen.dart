@@ -5,7 +5,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../models/stock.dart';
 import '../services/Services.dart';
-import '../services/Stockfetch.dart';
 
 class TickerScreen extends StatefulWidget {
   const TickerScreen({super.key});
