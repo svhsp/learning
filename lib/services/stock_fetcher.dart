@@ -1,41 +1,33 @@
-/*
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:stonks/models/stock_info.dart';
 
-final List<Stock> stocks = [
-  Stock(symbol: 'AAPL', price: 144.54, change: 0.89, changePercentage: 0.62),
-  Stock(symbol: 'MSFT', price: 262.59, change: -1.27, changePercentage: -0.48),
-  Stock(symbol: 'GOOG', price: 2145.79, change: -12.87, changePercentage: -0.6),
-  Stock(symbol: 'TSLA', price: 697.6, change: -5.27, changePercentage: -0.75),
-  Stock(symbol: 'AMZN', price: 3320.79, change: -11.56, changePercentage: -0.35),
-];
-
 class StockFetcher {
-  Future<List<Stock>> fetchStock(List<String> tickers) {
-    return Future.value(stocks);
-  }
-}*/
+  static const String _baseUrl =
+      'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=GOOG&apikey=G4UJ9ECYT8N1K1O6';
+  final String _apiKey;
 
-import 'dart:convert';
+  StockFetcher(this._apiKey);
 
-import 'package:http/http.dart' as http;
+  Future<List<Stock>> getStocks() async {
+    final response = await http.get(Uri.parse(
+        '$_baseUrl${'SYMBOL_SEARCH'}&keywords=Microsoft&apikey=$_apiKey'));
 
-import '../models/stock_info.dart';
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      final stocks = data['bestMatches'] as List<dynamic>?;
 
-class StockFetcher {
-  static const String _baseUrl = 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=AAPL&apikey=G4UJ9ECYT8N1K1O6';
-
-
-  static Future<List<StockInfo>> fetchStocks() async {
-    final response = await http.get(Uri.parse(_baseUrl));
-    final Map<String, dynamic> data = json.decode(response.body);
-    final Map<String, dynamic> stockData = data['Global Quote'];
-    return [
-      StockInfo(
-        symbol: stockData['01. symbol'],
-        name: '',
-        price: double.parse(stockData['05. price']),
-        change: double.parse(stockData['09. change']),
-      ),
-    ];
+      if (stocks != null) {
+        return stocks
+            .map((json) => Stock.fromJson(json))
+            .toList(growable: false);
+      } else {
+        throw Exception('Failed to load stocks');
+      }
+    } else {
+      throw Exception('Failed to load stocks');
+    }
   }
 }
+
+

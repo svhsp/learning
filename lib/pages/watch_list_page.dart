@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:stonks/models/stock_info.dart';
 import 'package:stonks/services/stock_fetcher.dart';
-
+import 'package:stonks/models/appbar.dart';
+import 'package:stonks/models/stock_list_view.dart';
 
 class WatchlistPage extends StatefulWidget {
   @override
@@ -9,25 +9,15 @@ class WatchlistPage extends StatefulWidget {
 }
 
 class _WatchlistPageState extends State<WatchlistPage> {
+  final StockFetcher stockFetcher = StockFetcher('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=GOOG&apikey=G4UJ9ECYT8N1K1O6');
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Stock Watchlist'),
-      ),
+      appBar: MyAppBar(),
       body: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
-        child: ListView.builder(
-          itemCount: stockList.length,
-          itemBuilder: (context, index) {
-            final stock = stockList[index];
-            return ListTile(
-              title: Text(stock.symbol),
-              subtitle: Text('${stock.price.toStringAsFixed(2)} (${stock.change.toStringAsFixed(2)})'),
-            );
-          },
-        )
+        child: StockListView(stockFetcher: stockFetcher),
 
       ),
     );
