@@ -4,8 +4,11 @@ import '../models/stock.dart';
 import '../widgets/stock_list.dart';
 
 class StockListPage extends StatelessWidget {
-  StockListPage({Key? key}) : super(key: key);
-  static const String pageName = "StockListPage";
+  static const String pageName = "/show_stock_price";
+  final List<Stock> stockList;
+
+  StockListPage({Key? key, required this.stockList}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +39,7 @@ class StockListPage extends StatelessWidget {
                 height: 30,
               ),
               StockList(
-                stocks: Stock.getStocks(),
+                stocks: stockList,
               ),
             ],
           ),

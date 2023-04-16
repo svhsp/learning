@@ -3,7 +3,7 @@ import 'package:teaching_at_svhsp/services/location.dart';
 import 'package:teaching_at_svhsp/widgets/location_card.dart';
 
 class ChooseLocation extends StatefulWidget {
-  static const pageName = "/choose_location_page";
+  static const pageName = "/choose_location";
   const ChooseLocation({Key? key}) : super(key: key);
 
   @override

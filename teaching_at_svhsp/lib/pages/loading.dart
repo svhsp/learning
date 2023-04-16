@@ -5,7 +5,7 @@ import 'package:teaching_at_svhsp/pages/show_location_time.dart';
 import 'package:logger/logger.dart';
 
 class Loading extends StatefulWidget {
-  static const pageName = "/loading_page";
+  static const pageName = "/loading";
   final String previousPage;
 
   const Loading({Key? key, required this.previousPage}) : super(key: key);

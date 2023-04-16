@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:teaching_at_svhsp/common/loading_page_flow.dart';
 import 'package:teaching_at_svhsp/pages/choose_location.dart';
+import 'package:teaching_at_svhsp/pages/loading_page.dart';
 import 'package:teaching_at_svhsp/pages/show_location_time.dart';
 import 'package:teaching_at_svhsp/pages/loading.dart';
 import 'package:teaching_at_svhsp/pages/stock_list_page.dart';
@@ -21,16 +23,16 @@ class TeachingApp4SVHSP extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: StockListPage.pageName,
+      initialRoute: Loading.pageName,
       title: 'Teaching App@SVHSP',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       routes: {
-        Loading.pageName: (context) => Loading(previousPage: '/'),
+        Loading.pageName: (context) =>
+            LoadingPage(pageFlow: LoadingPageFlow.loadStocks),
         ShowLocationTime.pageName: (context) => ShowLocationTime(),
         ChooseLocation.pageName: (context) => ChooseLocation(),
-        StockListPage.pageName: (context) => StockListPage(),
       },
     );
   }

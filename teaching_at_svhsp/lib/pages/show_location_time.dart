@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:teaching_at_svhsp/pages/choose_location.dart';
 
 class ShowLocationTime extends StatefulWidget {
-  static const pageName = "/home_page";
+  static const pageName = "/show_location";
   const ShowLocationTime({Key? key}) : super(key: key);
 
   @override

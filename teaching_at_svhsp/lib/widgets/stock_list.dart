@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../models/stock.dart';
@@ -9,52 +8,42 @@ class StockList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      scrollDirection: Axis.vertical,
-      shrinkWrap: true,
-      itemBuilder: (context, index) {
-        final stock = stocks[index];
-
-        return ListTile(
-          contentPadding: EdgeInsets.all(5),
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                stock.ticker,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              Text(
-                stock.ticker,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey[500],
-                ),
-              ),
-            ],
-          ),
-          trailing: Column(
-            children: <Widget>[
-              Text(
-                "${stock.price}",
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-      separatorBuilder: (context, index) {
-        return Divider(
-          color: Colors.grey[400],
-        );
-      },
-      itemCount: stocks.length,
+    return DataTable(
+      columns: const [
+        DataColumn(label: Text("Symbol")),
+        DataColumn(label: Text("Price")),
+        DataColumn(label: Text("Change")),
+      ],
+      rows: buildTable(stocks),
     );
+  }
+
+  DataRow buildRow(Stock stock) {
+    double percentageChange = stock.changeInPercentage;
+    late TextStyle style;
+
+    if (percentageChange < 0) {
+      style = const TextStyle(fontWeight: FontWeight.bold, color: Colors.red);
+    } else {
+      style = const TextStyle(fontWeight: FontWeight.bold, color: Colors.green);
+    }
+
+    return DataRow(cells: [
+      DataCell(Text(stock.ticker)),
+      DataCell(Text('${stock.price}')),
+      DataCell(Text(
+        "$percentageChange%",
+        style: style,
+      )),
+    ]);
+  }
+
+  List<DataRow> buildTable(List<Stock> stocks) {
+    List<DataRow> returnValue = [];
+    for (int i = 0; i < stocks.length; i++) {
+      Stock cur = stocks[i];
+      returnValue.add(buildRow(cur));
+    }
+    return returnValue;
   }
 }
