@@ -1,4 +1,4 @@
-import 'package:firebase_demo1/pages/verify_email.dart';
+import 'package:firebase_demo1/pages/stock_verify_email_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_demo1/reusable_widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';

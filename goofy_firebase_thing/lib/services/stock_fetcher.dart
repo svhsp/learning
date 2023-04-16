@@ -22,13 +22,15 @@ class StockFetcher {
           print("Ratelimited");
         }
         else {
+          print("Data retrieved");
           String percentageChange = data["10. change percent"];
-
+          print("Data retrieved");
           returnValue.add(StockInfo(
               ticker: tickerName,
               price: double.parse(data["05. price"]),
               percentageChange: double.parse(
                   percentageChange.substring(0, percentageChange.length - 2))));
+          print("Data retrieved 2");
         }
       }
       catch (error) {

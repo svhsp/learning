@@ -1,5 +1,5 @@
-import 'package:firebase_demo1/pages/search.dart';
-import 'package:firebase_demo1/pages/sign_in.dart';
+import 'package:firebase_demo1/pages/stock_search_screen.dart';
+import 'package:firebase_demo1/pages/stock_sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';

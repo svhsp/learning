@@ -1,8 +1,8 @@
-import 'package:firebase_demo1/pages/sign_up.dart';
+import 'package:firebase_demo1/pages/stock_sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_demo1/pages/sign_in.dart';
-import 'pages/home_page.dart';
+import 'package:firebase_demo1/pages/stock_sign_in_screen.dart';
+import 'pages/stock_home_page_screen.dart';
 import 'firebase_options.dart';
 
 void main() async {

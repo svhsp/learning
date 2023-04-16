@@ -1,4 +1,4 @@
-import 'package:firebase_demo1/pages/resetpassword.dart';
+import 'package:firebase_demo1/pages/stock_reset_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_demo1/reusable_widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
