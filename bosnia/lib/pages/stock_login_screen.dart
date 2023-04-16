@@ -1,4 +1,4 @@
-import 'package:bosnia/Stock Fetcher Project/pages/reset.dart';
+import 'package:bosnia/pages/stock_password_reset_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bosnia/reusable_widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
