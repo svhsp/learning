@@ -5,8 +5,7 @@ import 'package:login/pages/profileScreen.dart';
 import 'package:login/pages/registerScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:login/services/Services.dart';
-import 'models/stock.dart';
+import 'package:login/services/fetchServices.dart';import 'models/stock.dart';
 import 'pages/TickerScreen.dart';
 import 'firebase_options.dart';
 
@@ -18,6 +17,8 @@ String email = '';
 String age = '';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -76,4 +77,3 @@ class MyApp extends StatelessWidget {
 //     );
 //   }
 // }
-

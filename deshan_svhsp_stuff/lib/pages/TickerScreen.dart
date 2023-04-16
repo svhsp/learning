@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:login/pages/profileScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:login/services/DatabaseServices.dart';
 
 import '../models/stock.dart';
-import '../services/Services.dart';
+import '../services/fetchServices.dart';
+
+class loggedInID {
+  String id;
+  loggedInID(this.id);
+}
 
 class TickerScreen extends StatefulWidget {
   const TickerScreen({super.key});
@@ -20,16 +26,26 @@ class TickerScreenState extends State<TickerScreen> {
   List<DataRow> rows = List.empty(growable: true);
   late Future<List<Stock>> asyncStockData;
 
-  Future<List<Stock>> fetch (List<String> links) async {
-    //List<Stock> futureResult = await FetchServices.getStockData(links);
+  Future<List<Stock>> fetch (String userId) async {
+    // get url
+    // get stocks
+    // piece links
+    DatabaseServices a = new DatabaseServices();
+    String mainPiece = await a.getUrl();
+    List<String> links = List.empty(growable: true);
+    List<String>? stonks = await a.getUserPreferences(userId);
+
+    for (String link in stonks!) {
+      links.add(mainPiece + link + "&apikey=G4UJ9ECYT8N1K1O6");
+    }
+
     return FetchServices.getStockData(links);
   }
   @override
   Widget build (BuildContext context) {
-    List<String> links = List.empty(growable: true);
-    links.insert(0, 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=GOOG&apikey=G4UJ9ECYT8N1K1O6');
-    links.insert(1, 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=MSFT&apikey=G4UJ9ECYT8N1K1O6');
-    links.insert(2, 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=AMD&apikey=G4UJ9ECYT8N1K1O6');
+    final args = ModalRoute.of(context)!.settings.arguments as loggedInID;
+    DatabaseServices a = new DatabaseServices();
+
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
 
@@ -41,7 +57,7 @@ class TickerScreenState extends State<TickerScreen> {
         children: <Widget>[
           SizedBox(width: 1, height: 10),
         FutureBuilder<List<Stock>>(
-          future: fetch(links),
+          future: fetch(args.id),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               List<Stock> snapshotData = snapshot.data!;

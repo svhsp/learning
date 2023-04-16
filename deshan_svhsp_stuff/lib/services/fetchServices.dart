@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 import '../models/stock.dart';
 
-
 class FetchServices {
   static Future<List<Stock>> getStockData(List<String> links) async {
     final dio = Dio();
@@ -12,8 +11,6 @@ class FetchServices {
     List<Stock> stonks = List.empty(growable: true);
 
     for (String link in links) {
-
-
       final response = await dio.get(link);
       Map<String, dynamic> result = response.data;
       Stock stock = new Stock(result['Global Quote']['01. symbol'], result['Global Quote']['05. price'], result['Global Quote']['10. change percent']);

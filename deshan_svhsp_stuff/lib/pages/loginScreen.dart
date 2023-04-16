@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login/pages/TickerScreen.dart';
 import 'package:login/pages/profileScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -26,9 +27,12 @@ class LoginScreenState extends State<LoginScreen> {
     try {
       print("email " + userEmail + "password " + password);
       UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: userEmail, password: password);
+      print(userCredential.user?.uid);
 
       if (userCredential.user?.emailVerified == true) {
-        await Navigator.of(context).pushNamedAndRemoveUntil('/ticker', (route) => false, arguments: data(userEmail, password));
+        if (userCredential.user != null) {
+          await Navigator.of(context).pushNamedAndRemoveUntil('/ticker', (route) => false, arguments: loggedInID(userCredential.user!.uid));
+        }
       } else {
         showDialog(context: context, builder: (context) {
           return AlertDialog(
