@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "115031264807",
+    "firebase_url": "https://svhsp-heigui-heigui-default-rtdb.firebaseio.com",
     "project_id": "svhsp-heigui-heigui",
     "storage_bucket": "svhsp-heigui-heigui.appspot.com"
   },
@@ -10,6 +11,42 @@
         "mobilesdk_app_id": "1:115031264807:android:6458a65f27cf6773df8802",
         "android_client_info": {
           "package_name": "com.connor.bosnia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "115031264807-hvbckg3t58rgrtmvn1rrq289tr4sgnk8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxKzWLG0j2jkuQOBX9iTW4BENqDjK26Tk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "115031264807-hvbckg3t58rgrtmvn1rrq289tr4sgnk8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "115031264807-12q9mqrt13gpupuh19ghj445bsn7fgco.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bosnia"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:115031264807:android:258dfb67c1776391df8802",
+        "android_client_info": {
+          "package_name": "com.example.com"
         }
       },
       "oauth_client": [

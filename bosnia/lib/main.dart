@@ -1,8 +1,8 @@
-import 'package:bosnia/pages/up.dart';
+import 'package:bosnia/Stock Fetcher Project/pages/up.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:bosnia/pages/in.dart';
-import 'pages/home.dart';
+import 'package:bosnia/Stock Fetcher Project/pages/in.dart';
+import '/Stock Fetcher Project/pages/home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

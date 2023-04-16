@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:bosnia/models/stock.dart';
+import 'package:bosnia/Stock Fetcher Project/models/stock.dart';
 import 'package:flutter/material.dart';
 
 class StockFetcher {

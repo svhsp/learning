@@ -1,4 +1,4 @@
-import 'package:bosnia/models/stock.dart';
+import 'package:bosnia/Stock Fetcher Project/models/stock.dart';
 import 'package:flutter/material.dart';
 import '../services/stock_fetcher.dart';
 
