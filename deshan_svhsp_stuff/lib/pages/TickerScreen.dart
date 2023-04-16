@@ -36,7 +36,7 @@ class TickerScreenState extends State<TickerScreen> {
     List<String>? stonks = await a.getUserPreferences(userId);
 
     for (String link in stonks!) {
-      links.add(mainPiece + link + "&apikey=G4UJ9ECYT8N1K1O6");
+      links.add(mainPiece + link + "&apikey=YNGXUGMXQ93PLTF6");
     }
 
     return FetchServices.getStockData(links);
@@ -74,10 +74,26 @@ class TickerScreenState extends State<TickerScreen> {
                   DataCell(Text(stock.change)),
                 ]));
             }
-              return DataTable(columns: columns, rows: rows);
+              return Column(
+                children: <Widget>[
+                  Center(
+                      child: ListView(
+                        shrinkWrap: true,
+                        children: [
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: DataTable(columns: columns, rows: rows),
+                        ),
+                        ],
+                    ),
+                  ),
+
+            ],
+              );
             } else if (snapshot.hasError) {
+              print(snapshot.error);
               // Handle error case
-              return Text('Error loading data');
+              return Text('Error loading data, remember that you can have a maximum of 5 stocks.');
             } else {
               // Async data is not yet ready, show a loading spinner
               return Center(child: CircularProgressIndicator());

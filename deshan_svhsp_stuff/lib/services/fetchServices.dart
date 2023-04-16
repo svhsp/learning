@@ -12,15 +12,19 @@ class FetchServices {
 
     for (String link in links) {
       final response = await dio.get(link);
-      Map<String, dynamic> result = response.data;
-      Stock stock = new Stock(result['Global Quote']['01. symbol'], result['Global Quote']['05. price'], result['Global Quote']['10. change percent']);
+      print("response: " + response.data.toString());
 
+      Map<String, dynamic> result = response.data;
+
+      if (result != null && result != "") {
+        Stock stock = new Stock(result['Global Quote']['01. symbol'], result['Global Quote']['05. price'], result['Global Quote']['10. change percent']);
+        stonks.add(stock);
+        print("get result: " + stock.toString());
+      }
       // add try catch, check if the stock thingy is empty,
       // Stock stock = await Future.delayed(Duration(seconds: 2), () {
       //   return new Stock("test", "1", "2");
       // });
-      stonks.add(stock);
-      print("get result: " + stock.toString());
     }
 
     return stonks;
