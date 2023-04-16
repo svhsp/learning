@@ -86,7 +86,7 @@ class TickerScreenState extends State<TickerScreen> {
                         ),
                         ],
                     ),
-                  ),
+                  ),a
 
             ],
               );
