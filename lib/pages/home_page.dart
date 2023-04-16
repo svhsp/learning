@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'signup.dart';
+import '../models/signup.dart';
 import 'watch_list_page.dart';
 
 class HomePage extends StatefulWidget {
