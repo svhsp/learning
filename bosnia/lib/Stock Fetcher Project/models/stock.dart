@@ -1,7 +1,7 @@
 class Stock {
   late String ticker;
-  late double price = 103.73;
-  late double percentageChange = 2.81;
+  late String price = "103.73";
+  late String percentageChange = "2.81";
 
   Stock({required this.ticker, required this.price, required this.percentageChange});
 
