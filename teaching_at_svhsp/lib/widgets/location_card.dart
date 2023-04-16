@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:teaching_at_svhsp/pages/choose_location.dart';
-import 'package:teaching_at_svhsp/pages/loading.dart';
+import 'package:teaching_at_svhsp/common/loading_page_flow.dart';
+import 'package:teaching_at_svhsp/pages/loading_page.dart';
 import 'package:teaching_at_svhsp/services/location.dart';
 
 class LocationCard extends StatelessWidget {
@@ -25,7 +25,7 @@ class LocationCard extends StatelessWidget {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) =>
-                    const Loading(previousPage: ChooseLocation.pageName),
+                    LoadingPage(pageFlow: LoadingPageFlow.loadSelectedLocation),
                 settings: RouteSettings(arguments: {
                   'location': location.name,
                   'flag': location.flag,
