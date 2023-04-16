@@ -1,4 +1,4 @@
-package com.example.stonks
+package com.example.learning1
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,4 +1,4 @@
-name: stonks
+name: learning1
 description: A new Flutter project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -30,15 +30,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
-  http: ^0.13.4
 
-  firebase_core: ^2.8.0
-  cloud_firestore: ^4.4.5
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  firebase_auth: ^4.3.0
-  google_sign_in: ^6.0.2
+  cupertino_icons: ^1.0.2
 
 dev_dependencies:
   flutter_test:
