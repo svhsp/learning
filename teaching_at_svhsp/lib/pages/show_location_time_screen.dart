@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:teaching_at_svhsp/pages/choose_location.dart';
+import 'package:teaching_at_svhsp/pages/choose_location_screen.dart';
 
-class ShowLocationTime extends StatefulWidget {
+class ShowLocationTimeScreen extends StatefulWidget {
   static const pageName = "/show_location";
-  const ShowLocationTime({Key? key}) : super(key: key);
+  const ShowLocationTimeScreen({Key? key}) : super(key: key);
 
   @override
-  State<ShowLocationTime> createState() => _ShowLocationTimeState();
+  State<ShowLocationTimeScreen> createState() => _ShowLocationTimeScreenState();
 }
 
-class _ShowLocationTimeState extends State<ShowLocationTime> {
+class _ShowLocationTimeScreenState extends State<ShowLocationTimeScreen> {
   Map routeArgs = {};
 
   @override
@@ -33,7 +33,8 @@ class _ShowLocationTimeState extends State<ShowLocationTime> {
               children: [
                 ElevatedButton.icon(
                   onPressed: () {
-                    Navigator.of(context).pushNamed(ChooseLocation.pageName);
+                    Navigator.of(context)
+                        .pushNamed(ChooseLocationScreen.pageName);
                   },
                   icon: Icon(
                     Icons.edit_location,

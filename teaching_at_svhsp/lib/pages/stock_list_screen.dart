@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import '../models/stock.dart';
 import '../widgets/stock_list.dart';
 
-class StockListPage extends StatelessWidget {
+class StockListScreen extends StatelessWidget {
   static const String pageName = "/show_stock_price";
   final List<Stock> stockList;
 
-  StockListPage({Key? key, required this.stockList}) : super(key: key);
+  StockListScreen({Key? key, required this.stockList}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

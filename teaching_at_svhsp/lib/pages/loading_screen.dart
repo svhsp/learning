@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:logger/logger.dart';
 import 'package:teaching_at_svhsp/common/loading_page_flow.dart';
-import 'package:teaching_at_svhsp/pages/show_location_time.dart';
-import 'package:teaching_at_svhsp/pages/stock_list_page.dart';
+import 'package:teaching_at_svhsp/pages/show_location_time_screen.dart';
+import 'package:teaching_at_svhsp/pages/stock_list_screen.dart';
 import 'package:teaching_at_svhsp/services/location.dart';
 import 'package:teaching_at_svhsp/widgets/stock_manager.dart';
 
 import '../models/stock.dart';
 
-class LoadingPage extends StatelessWidget {
+class LoadingScreen extends StatelessWidget {
+  static const pageName = "/loading";
   final logger = Logger();
   final LoadingPageFlow pageFlow;
   StockManager stockManager = StockManager();
 
-  LoadingPage({Key? key, required this.pageFlow}) : super(key: key);
+  LoadingScreen({Key? key, required this.pageFlow}) : super(key: key);
 
   void doBackendWork(BuildContext context) async {
     if (pageFlow == LoadingPageFlow.loadDefaultLocation ||
@@ -31,7 +32,7 @@ class LoadingPage extends StatelessWidget {
     // route to home page to show the time & location.
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (context) => StockListPage(stockList: stockList),
+        builder: (context) => StockListScreen(stockList: stockList),
       ),
     );
   }
@@ -57,7 +58,7 @@ class LoadingPage extends StatelessWidget {
     // route to home page to show the time & location.
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (context) => const ShowLocationTime(),
+        builder: (context) => const ShowLocationTimeScreen(),
         settings: RouteSettings(
           arguments: {
             'location': selectedLocation.name,

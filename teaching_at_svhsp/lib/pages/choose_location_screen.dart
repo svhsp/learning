@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:teaching_at_svhsp/services/location.dart';
 import 'package:teaching_at_svhsp/widgets/location_card.dart';
 
-class ChooseLocation extends StatefulWidget {
+class ChooseLocationScreen extends StatefulWidget {
   static const pageName = "/choose_location";
-  const ChooseLocation({Key? key}) : super(key: key);
+  const ChooseLocationScreen({Key? key}) : super(key: key);
 
   @override
-  State<ChooseLocation> createState() => _ChooseLocationState();
+  State<ChooseLocationScreen> createState() => _ChooseLocationScreenState();
 }
 
-class _ChooseLocationState extends State<ChooseLocation> {
+class _ChooseLocationScreenState extends State<ChooseLocationScreen> {
   List<Location> locations = [
     Location(url: 'Europe/London', name: 'London', flag: 'uk.png'),
     Location(url: 'Europe/Berlin', name: 'Athens', flag: 'greece.png'),
