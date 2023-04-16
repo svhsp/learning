@@ -5,49 +5,6 @@ import 'package:firebase_core/firebase_core.dart';
 import '../Widgets/EmailVerificationScreen.dart';
 import '../Resources/firebase_options.dart';
 import '../Resources/firebase_constants.dart';
-import 'emailandpassword sign in.dart';
-import 'stockpage.dart';
-
-void main() async{
-  runApp(const MyApp());
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  FirebaseFirestore.instance.collection("Sarajevo69420").add({
-    "name": "Jackson",
-    "favorites": {
-      "food": "Electricity",
-      "color": "Magenta",
-      "subject": "Math",
-      "activities": {
-        "sports" : "cricket",
-        "country" : "bosnia",
-      },
-    },
-    "age": 69420
-  });
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Profile Creator',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      initialRoute: '/login',
-      routes: {
-        '/': (context) => const MyHomePage(title: "Sign Up"),
-        '/login': (context) => const loginPage(title: "Login"),
-        '/homePage': (context) => const StocksPage(title: "Stocks"),
-      },
-    );
-  }
-}
-
 class _MyHomePageState extends State<MyHomePage> {
   final usernameCon = TextEditingController();
   final emailCon = TextEditingController();
@@ -156,15 +113,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 Row(
                     children:[
                       ElevatedButton(
-                        onPressed: () {
-                          _updateProfile();
-                        },
-                        child: const Text('Submit'),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.cyan[800],
-                          onPrimary: Colors.white,
-                          textStyle: TextStyle(fontSize:20),
-                        )
+                          onPressed: () {
+                            _updateProfile();
+                          },
+                          child: const Text('Submit'),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.cyan[800],
+                            onPrimary: Colors.white,
+                            textStyle: TextStyle(fontSize:20),
+                          )
                       ), ElevatedButton(
                         onPressed: () {
                           Navigator.pushNamed(context, '/login');
@@ -219,15 +176,15 @@ class _homeState extends State<homepage>{
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/login');
-                },
-                child: const Text('logout'),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.deepOrangeAccent[800],
-                  onPrimary: Colors.white,
-                  textStyle: TextStyle(fontSize:20),
-                )
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/login');
+                  },
+                  child: const Text('logout'),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.deepOrangeAccent[800],
+                    onPrimary: Colors.white,
+                    textStyle: TextStyle(fontSize:20),
+                  )
               ),
             ]),
       ),
@@ -304,9 +261,9 @@ class _loginPageState extends State<loginPage> {
                           }
                         }),
                     ElevatedButton(
-                      onPressed: () async {
-                        // UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: emailControl.text, password: passwordControl.text);
-                        var goThrough = false;
+                        onPressed: () async {
+                          // UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: emailControl.text, password: passwordControl.text);
+                          var goThrough = false;
                           FirebaseFirestore.instance.collection("Sarajevo")
                               .where(
                               "username", isEqualTo: passwordControl.text)
@@ -318,24 +275,24 @@ class _loginPageState extends State<loginPage> {
                                     context, '/homePage');
                               }
                           );
-                      },
-                      child: const Text('Submit'),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.cyan[800],
-                        onPrimary: Colors.white,
-                        textStyle: TextStyle(fontSize:20),
-                      )
+                        },
+                        child: const Text('Submit'),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.cyan[800],
+                          onPrimary: Colors.white,
+                          textStyle: TextStyle(fontSize:20),
+                        )
                     ),
                     ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/');
-                      },
-                      child: const Text('Sign up'),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.blue[800],
-                        onPrimary: Colors.white,
-                        textStyle: TextStyle(fontSize:20),
-                      )
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/');
+                        },
+                        child: const Text('Sign up'),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.blue[800],
+                          onPrimary: Colors.white,
+                          textStyle: TextStyle(fontSize:20),
+                        )
                     ),
                   ]),
             ),
@@ -345,8 +302,4 @@ class _loginPageState extends State<loginPage> {
     );
   }
 }
-
-
-
-
 

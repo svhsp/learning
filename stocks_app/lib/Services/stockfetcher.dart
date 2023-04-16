@@ -3,15 +3,10 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:intl/intl.dart';
 import 'package:mongles/Widgets/stockclass.dart';
+import 'package:async/async.dart';
+
 
 class StockFetcher {
-  List<Stocks> fetchStocks(List<String> tickers) {
-    List<Stocks> output = [];
-    for (int i = 0; i < tickers.length; i++) {
-      output.add(Stocks(tickers[i], "appleREAL", 69, 39));
-    }
-    return output;
-  }
   static List<DataRow> buildTable(List<Stocks> stocks) {
     List<DataRow> output = [];
 
@@ -38,7 +33,6 @@ class StockFetcher {
 
     return DataRow(cells: [
       DataCell(Text(stockInfo.ticker_name)),
-      DataCell(Text(stockInfo.company)),
       DataCell(Text('${stockInfo.price} USD')),
       DataCell(Text(percentageChange, style: stockStyle,)),
     ]);
