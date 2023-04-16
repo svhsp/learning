@@ -6,11 +6,16 @@ import 'api_request.dart';
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
 
+
   @override
   _SearchPageState createState() => _SearchPageState();
 }
 
 class _SearchPageState extends State<SearchPage> {
+  final supabase = SupabaseClient(
+    'https://tuduixqbwmummppelbgt.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR1ZHVpeHFid211bW1wcGVsYmd0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODA4OTk3MzksImV4cCI6MTk5NjQ3NTczOX0.0I3hFGhrwYB8A5tpL78UW7JJJbvPRwLnfCvDwEzBMIE',
+  );
   String _searchQuery = '';
   Map<String, dynamic>? _searchResult;
 
@@ -104,11 +109,6 @@ class _SearchPageState extends State<SearchPage> {
                   ElevatedButton(
                     child: const Text('Add to Watchlist'),
                     onPressed: () async {
-                      final supabase = SupabaseClient(
-                          'https://tuduixqbwmummppelbgt.supabase.co',
-                          String.fromEnvironment('SUPABASE_ANNON_KEY')
-                      );
-
                       final response = await supabase.from('tickers').select().eq('name', _searchResult!['01. symbol']).execute();
                       if (response.status == 200 && response.data.length > 0) {
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -119,6 +119,7 @@ class _SearchPageState extends State<SearchPage> {
                         );
                       } else {
                         final insertResponse = await supabase.from('tickers').insert({'name': _searchResult!['01. symbol']}).execute();
+
                         if (insertResponse.status != 201) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
@@ -127,13 +128,24 @@ class _SearchPageState extends State<SearchPage> {
                             ),
                           );
                         } else {
+                          // Update _searchResult with new data
+                          setState(() => {
+                            _searchResult = {
+                              '01. symbol': _searchResult!['01. symbol'],
+                              '05. price': _searchResult!['05. price'],
+                              '02. open': _searchResult!['02. open'],
+                              '03. high': _searchResult!['03. high'],
+                              '04. low': _searchResult!['04. low'],
+                            },
+                          });
+
                           Navigator.pop(context);
-                          setState(() {});
                         }
                       }
                     },
+
                   ),
-                ],
+       ],
               ),
           ],
         ),

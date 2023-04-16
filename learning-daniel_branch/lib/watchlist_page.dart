@@ -6,10 +6,11 @@ class WatchListPage extends StatefulWidget {
   @override
   _WatchListPageState createState() => _WatchListPageState();
 }
+
 class _WatchListPageState extends State<WatchListPage> {
   final supabase = SupabaseClient(
-    'https://tuduixqbwmummppelbgt.supabase.co',
-    String.fromEnvironment('SUPABASE_ANNON_KEY')
+      'https://tuduixqbwmummppelbgt.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR1ZHVpeHFid211bW1wcGVsYmd0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODA4OTk3MzksImV4cCI6MTk5NjQ3NTczOX0.0I3hFGhrwYB8A5tpL78UW7JJJbvPRwLnfCvDwEzBMIE'
   );
 
   List<String> _tickerNames = [];
@@ -24,37 +25,34 @@ class _WatchListPageState extends State<WatchListPage> {
 
   Future<void> _loadTickerNames() async {
     final response = await supabase.from('tickers').select('name').execute();
-    if (response.status == 200) {
-      final tickerNames = response.data.cast<Map<String, dynamic>>().map((ticker) => ticker['name'].toString()).toList().cast<String>();
-      setState(() {
-        _tickerNames = tickerNames;
-        build(context);
-      });
-    } else {
-      // handle error
-    }
+    final tickerNames = response.data
+        .cast<Map<String, dynamic>>()
+        .map((ticker) => ticker['name'].toString())
+        .toList()
+        .cast<String>();
+    setState(() {
+      _tickerNames = tickerNames;
+    });
   }
 
-
   Future<void> _removeTicker(String ticker) async {
-    final response = await supabase.from('tickers').delete().eq('name', ticker).execute();
-    if (response.status != 200) {
-      // handle error
-    }
+    final response =
+    await supabase.from('tickers').delete().eq('name', ticker).execute();
     _loadTickerNames();
   }
 
   Future<void> _updateTickerPrice(String ticker) async {
     final stockData = await fetchStockData(ticker);
     if (stockData != null) {
-      final tickerPrice = double.parse(stockData['Global Quote']['05. price']);
-      final tickerChange = double.parse(stockData['Global Quote']['09. change']);
+      final tickerPrice =
+      double.parse(stockData['Global Quote']['05. price']);
+      final tickerChange =
+      double.parse(stockData['Global Quote']['09. change']);
       setState(() {
         _tickerPrices[ticker] = tickerPrice;
         _tickerChanges[ticker] = tickerChange;
       });
     }
-    _loadTickerNames();
   }
 
   double getTickerPrice(String ticker) {
@@ -82,7 +80,6 @@ class _WatchListPageState extends State<WatchListPage> {
       body: ListView.builder(
         itemCount: _tickerNames.length,
         itemBuilder: (context, index) {
-          _loadTickerNames();
           final ticker = _tickerNames[index];
           return ListTile(
             title: Column(
@@ -103,7 +100,6 @@ class _WatchListPageState extends State<WatchListPage> {
           );
         },
       ),
-
     );
   }
 }
