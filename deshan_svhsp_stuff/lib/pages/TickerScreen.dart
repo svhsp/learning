@@ -68,6 +68,14 @@ class TickerScreenState extends State<TickerScreen> {
               ];
 
               for (Stock stock in snapshotData) {
+                bool flag = false;
+
+                for (int i = 0; i < rows.length; i++) {
+                  DataRow row =  rows[i];
+
+
+                }
+
                 rows.add(DataRow(cells: [
                   DataCell(Text(stock.ticker_name)),
                   DataCell(Text(stock.price)),
@@ -77,23 +85,27 @@ class TickerScreenState extends State<TickerScreen> {
               return Column(
                 children: <Widget>[
                   Center(
-                      child: ListView(
-                        shrinkWrap: true,
-                        children: [
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: DataTable(columns: columns, rows: rows),
+                      child: Container(
+                        height: 500,
+                        child: ListView(
+                          shrinkWrap: true,
+                          children: [
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: DataTable(columns: columns, rows: rows),
+                            ),
+                          ],
                         ),
-                        ],
-                    ),
-                  ),a
+                      ),
+
+                  ),
 
             ],
               );
             } else if (snapshot.hasError) {
               print(snapshot.error);
               // Handle error case
-              return Text('Error loading data, remember that you can have a maximum of 5 stocks.');
+              return Text('Error loading data, remember that you can have a maximum of 5 API calls in a minute.');
             } else {
               // Async data is not yet ready, show a loading spinner
               return Center(child: CircularProgressIndicator());
