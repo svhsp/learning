@@ -15,11 +15,44 @@ class _WatchlistPageState extends State<WatchlistPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: StockListView(stockFetcher: stockFetcher),
+      body: Center(
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 60),
+                  child: Text(
+                    'Symbol',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Text(
+                    'Price',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 60),
+                  child: Text(
+                    'Change',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
 
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: StockListView(stockFetcher: stockFetcher),),
+          ],
+        ),
       ),
+
+
+
     );
   }
 }
