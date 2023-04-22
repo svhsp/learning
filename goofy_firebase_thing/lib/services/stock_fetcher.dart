@@ -18,7 +18,8 @@ class StockFetcher {
 
         Map data = jsonDecode(dataResponse.body);
 
-        if (data.containsKey("Note")) {
+        //if (data.containsKey("Note")) {
+        if (false) {
           print("Ratelimited");
         }
         else {
