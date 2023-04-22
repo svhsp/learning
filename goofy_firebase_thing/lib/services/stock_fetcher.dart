@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:intl/intl.dart';
 
-final String key = "I0YHBFLUAAA5GSUU";
+final String key = "cgu3hqpr01qu2uq5p73gcgu3hqpr01qu2uq5p740";
 
 class StockFetcher {
   Future<List<StockInfo>> fetchStocks(List<String> tickers) async {
@@ -14,7 +14,7 @@ class StockFetcher {
 
       try {
         http.Response dataResponse = await http.get(Uri.parse(
-            "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${tickerName}&apikey=${key}"));
+            "https://finnhub.io/api/v1/quote?symbol=${tickerName}&token=${key}"));
 
         Map data = jsonDecode(dataResponse.body);
 
@@ -23,11 +23,11 @@ class StockFetcher {
         }
         else {
           print("Data retrieved");
-          String percentageChange = data["10. change percent"];
+          String percentageChange = data["dp"]; // percentage change
           print("Data retrieved");
           returnValue.add(StockInfo(
               ticker: tickerName,
-              price: double.parse(data["05. price"]),
+              price: double.parse(data["c"]), // price
               percentageChange: double.parse(
                   percentageChange.substring(0, percentageChange.length - 2))));
           print("Data retrieved 2");
