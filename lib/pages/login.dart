@@ -55,7 +55,7 @@ class Login extends StatelessWidget {
       return null;
     }
     catch (error) {
-      print("balls");
+      print("ERROR WITH LOGGING IN");
       print(error.toString());
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Unknown error")));
       return null;

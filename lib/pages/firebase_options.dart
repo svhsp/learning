@@ -44,40 +44,40 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCfRfeP6FhMfMZycZHsQj8E5uImdEGDLIA',
-    appId: '1:681957771399:web:9138d7c6d5ae98a16f9022',
-    messagingSenderId: '681957771399',
-    projectId: 'peeisstoredintheballs-be357',
-    authDomain: 'peeisstoredintheballs-be357.firebaseapp.com',
-    storageBucket: 'peeisstoredintheballs-be357.appspot.com',
-    measurementId: 'G-VRZBR7SK1F',
+    apiKey: 'AIzaSyAdCgKxqHugK99sMFiVbKjKbqY2YSXeU0Q',
+    appId: '1:397476529560:web:06609388a5c13d577d97ed',
+    messagingSenderId: '397476529560',
+    projectId: 'wawaaaa-59eeb',
+    authDomain: 'wawaaaa-59eeb.firebaseapp.com',
+    storageBucket: 'wawaaaa-59eeb.appspot.com',
+    measurementId: 'G-PS5G536W3E',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCHOuWw23cKNkGy5ToafE7xrdsJuvhyorY',
-    appId: '1:681957771399:android:b723c97ab3db3be16f9022',
-    messagingSenderId: '681957771399',
-    projectId: 'peeisstoredintheballs-be357',
-    storageBucket: 'peeisstoredintheballs-be357.appspot.com',
+    apiKey: 'AIzaSyCIj1OtekOtn_zBtKBwcBMQRdIu6MxOFGc',
+    appId: '1:397476529560:android:e0f6d214f65eedd37d97ed',
+    messagingSenderId: '397476529560',
+    projectId: 'wawaaaa-59eeb',
+    storageBucket: 'wawaaaa-59eeb.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDEAOpEf5WS2KRd5kfqESlfEQ6Qhbz63yc',
-    appId: '1:681957771399:ios:eceac6d5d397fe656f9022',
-    messagingSenderId: '681957771399',
-    projectId: 'peeisstoredintheballs-be357',
-    storageBucket: 'peeisstoredintheballs-be357.appspot.com',
-    iosClientId: '681957771399-ndbl2pm41urjaj3uvj3u8fs2jtaok391.apps.googleusercontent.com',
-    iosBundleId: 'com.example.corner',
+    apiKey: 'AIzaSyDoVJ19UNzKnBSCztJ5ke5sg-eObunFtJw',
+    appId: '1:397476529560:ios:6bc79050c3488c607d97ed',
+    messagingSenderId: '397476529560',
+    projectId: 'wawaaaa-59eeb',
+    storageBucket: 'wawaaaa-59eeb.appspot.com',
+    iosClientId: '397476529560-2r4sckp6flt3c46ocnsi47tarfir8id6.apps.googleusercontent.com',
+    iosBundleId: 'com.example.learning',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDEAOpEf5WS2KRd5kfqESlfEQ6Qhbz63yc',
-    appId: '1:681957771399:ios:eceac6d5d397fe656f9022',
-    messagingSenderId: '681957771399',
-    projectId: 'peeisstoredintheballs-be357',
-    storageBucket: 'peeisstoredintheballs-be357.appspot.com',
-    iosClientId: '681957771399-ndbl2pm41urjaj3uvj3u8fs2jtaok391.apps.googleusercontent.com',
-    iosBundleId: 'com.example.corner',
+    apiKey: 'AIzaSyDoVJ19UNzKnBSCztJ5ke5sg-eObunFtJw',
+    appId: '1:397476529560:ios:6bc79050c3488c607d97ed',
+    messagingSenderId: '397476529560',
+    projectId: 'wawaaaa-59eeb',
+    storageBucket: 'wawaaaa-59eeb.appspot.com',
+    iosClientId: '397476529560-2r4sckp6flt3c46ocnsi47tarfir8id6.apps.googleusercontent.com',
+    iosBundleId: 'com.example.learning',
   );
 }

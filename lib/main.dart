@@ -21,7 +21,7 @@ void main() async {
     initialRoute: '/',
     routes: {
       // '/': (context) => CreateAccount(),
-      '/': (context) => StockListPage(),
+      '/': (context) => Login(),
       '/login': (context) => Login(),
       '/verify': (context) => Verification(),
       '/StockList': (context) => StockListPage(),

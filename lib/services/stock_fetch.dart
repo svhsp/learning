@@ -1,45 +1,32 @@
 import 'package:learning/models/stock_info.dart';
-import 'package:flutter/material.dart';
-import 'package:learning/pages/stock_list_page.dart';
-import 'package:flutter/material.dart';
-import 'package:learning/pages/verification.dart';
-import 'package:learning/pages/stock_list_page.dart';
-import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:learning/pages/firebase_options.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:learning/pages/createacc.dart';
-import 'package:learning/pages/verification.dart';
-import 'package:learning/pages/login.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class StockFetch {
-  static Future<List<Stock>> fetchStocks() async {
-    return [
-      Stock(
-        tickerName: 'AAPL',
-        company: 'Apple Inc.',
-        price: 133.5,
-        change: -0.2,
-      ),
-      Stock(
-        tickerName: 'GOOG',
-        company: 'Alphabet Inc.',
-        price: 2213.5,
-        change: 0.5,
-      ),
-      Stock(
-        tickerName: 'MSFT',
-        company: 'Microsoft Corporation',
-        price: 249.9,
-        change: -0.1,
-      ),
-      Stock(
-        tickerName: 'TSLA',
-        company: 'Tesla Inc.',
-        price: 708.0,
-        change: 0.8,
-      ),
-    ];
+  static Future<List<StockInfo>> fetchStocks(List<String> tickers) async {
+    List<StockInfo> returnValue = [];
+    for (int i = 0; i < tickers.length; i++) {
+      String tickerName = tickers[i];
+      // try{
+        http.Response dataResponse = await http.get(Uri.parse(
+            "https://finnhub.io/api/v1/quote?symbol=$tickerName&token=ch21rb1r01qroac5qu90ch21rb1r01qroac5qu9g"));
+
+        Map data = jsonDecode(dataResponse.body);
+        print(data);
+        double percent = data["dp"];
+        double price = data["c"];
+        returnValue.add(StockInfo(
+          tickerName: tickers[i],
+          price: price,
+          percentChange: percent,
+        ));
+
+      // }
+      // catch (e) {
+      //   print("error with stockFetch");
+      // }
+
+    }
+    return returnValue;
   }
 }

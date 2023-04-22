@@ -132,18 +132,6 @@ class CreateAccountFormState extends State<CreateAccountForm> {
               obscureText: true,
             ),
             SizedBox(height: 10),
-            DropdownButtonFormField(items: [
-              DropdownMenuItem(child: Text("White"), value: "White",),
-              DropdownMenuItem(child: Text("Black"), value: "Black",),
-              DropdownMenuItem(child: Text("Asian"), value: "Asian",),
-              DropdownMenuItem(child: Text("Bosnian"), value: "Bosnian",),
-              DropdownMenuItem(child: Text("Latino"), value: "Latino",),
-              // DropdownMenuItem(child: Text("Normal")),
-            ], onChanged: (balls) {
-              race = balls.toString();
-              print(race);
-            }, value: "Asian",),
-            SizedBox(height: 10),
             ElevatedButton(onPressed: () async {
               if (_formKey.currentState!.validate()) {
                 await CreateAccount.SignUp(email: email.text, password: password.text, context: context);

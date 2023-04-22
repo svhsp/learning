@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 class StockCard extends StatelessWidget {
   final String tickerName;
-  final String company;
-  final double price;
-  final double change;
+
+  final String price;
+  final String percentChange;
 
   const StockCard({
     Key? key,
     required this.tickerName,
-    required this.company,
+
     required this.price,
-    required this.change,
+    required this.percentChange,
   }) : super(key: key);
 
   @override
@@ -24,9 +24,9 @@ class StockCard extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        title: Text(company),
+        title: Text(tickerName),
         subtitle: Text(
-          'Price: ${price.toStringAsFixed(2)}, Change: ${change.toStringAsFixed(2)}',
+          'Price: ${price}, Change: ${percentChange}',
         ),
       ),
     );
