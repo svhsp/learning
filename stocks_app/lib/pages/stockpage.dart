@@ -28,8 +28,23 @@ class StocksPage extends StatefulWidget {
 }
 
 class _StocksPageState extends State<StocksPage> {
-  StockFetcher getData = StockFetcher();
   List<String> stockIds = ["APPL", "GAMESTOP", "SVB"];
+  List<Stocks> tempList = [];
+  List<Stocks> stockList = [];
+  void getStockInfo(List<String> stockIds) async {
+    tempList = await getStock(stockIds);
+    setState(() {
+      stockList = tempList;
+    });
+  }
+  @override
+  void initState() {
+    getStockInfo(stockIds);
+    Timer timer = Timer.periodic(Duration(seconds: 15), (timer) {
+      getStockInfo(stockIds);
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,13 +58,50 @@ class _StocksPageState extends State<StocksPage> {
               DataColumn(label: Text("Symbol")),
               DataColumn(label: Text("Price")),
               DataColumn(label: Text("Change")),
-            ], rows: StockFetcher.buildTable(stocksID))
-            print("hello world");
+            ], rows: buildTable(stockList))
           ],
         ),
       ),
     );
   }
+}
+
+List<DataRow> buildTable(List<Stocks> stocks)  {
+  List<DataRow> output = [];
+  try {
+    for (int i = 0; i < stocks.length; i++) {
+      Stocks newStock = stocks[i];
+      output.add(dataRow(newStock));
+    }
+  } catch(e){
+     output.add(DataRow(cells: [
+      DataCell(Text("NULL", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red))),
+      DataCell(Text("NULL", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red))),
+      DataCell(Text("NULL", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red))),
+    ]));
+  }
+  return output;
+}
+
+DataRow dataRow(Stocks stockInfo) {
+    String percentageChange = '${stockInfo.change}%';
+    late TextStyle stockStyle;
+
+    if (stockInfo.change < 0) {
+      percentageChange = '+$percentageChange';
+      stockStyle =
+      const TextStyle(fontWeight: FontWeight.bold, color: Colors.red);
+    }
+    else {
+      stockStyle =
+      const TextStyle(fontWeight: FontWeight.bold, color: Colors.green);
+    }
+
+    return DataRow(cells: [
+      DataCell(Text(stockInfo.ticker_name)),
+      DataCell(Text('${stockInfo.price} USD')),
+      DataCell(Text(percentageChange, style: stockStyle,)),
+    ]);
 }
 
 Future<List<Stocks>> getStock(List<String> ids) async {
@@ -60,14 +112,15 @@ Future<List<Stocks>> getStock(List<String> ids) async {
           'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${ids[i]}&apikey=G4UJ9ECYT8N1K1O6');
       var response = await http.get(url);
       Map data = jsonDecode(response.body);
-      print(data);
       int percent = data['Global Quote']['10. change percent'];
       int price = data['Global Quote']['05. price'];
       output1.add(Stocks(ids[i], price, percent));
     }
     catch (e) {
-      print('http call fail');
+      print(e);
+      output1.add(Stocks("NULL", -69, -69));
     }
   }
   return output1;
 }
+
