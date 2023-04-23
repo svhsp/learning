@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "24036376102",
+    "firebase_url": "https://africanwater-68f12-default-rtdb.firebaseio.com",
+    "project_id": "africanwater-68f12",
+    "storage_bucket": "africanwater-68f12.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:24036376102:android:be752d97deae4012eff0e7",
+        "android_client_info": {
+          "package_name": "login.page"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "24036376102-jrcvhfhmu7tuor7kemsiu7r9aikb7i19.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrJ12V7GV_dn-SulefHjfJ8qkXnHGN0rw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "24036376102-jrcvhfhmu7tuor7kemsiu7r9aikb7i19.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

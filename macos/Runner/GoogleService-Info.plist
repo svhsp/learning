@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>24036376102-no485a22tv3u3cq35v65mpio3meunn86.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.24036376102-no485a22tv3u3cq35v65mpio3meunn86</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBW-2vwPtxs3Kp5WT_71JTvUAIkdvzm2js</string>
+	<key>GCM_SENDER_ID</key>
+	<string>24036376102</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.untitled</string>
+	<key>PROJECT_ID</key>
+	<string>africanwater-68f12</string>
+	<key>STORAGE_BUCKET</key>
+	<string>africanwater-68f12.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:24036376102:ios:90457a4dc6e03baceff0e7</string>
+	<key>DATABASE_URL</key>
+	<string>https://africanwater-68f12-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
