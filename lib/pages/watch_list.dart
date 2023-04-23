@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:StockWatchListApp/models/stock_info.dart';
-import 'package:StockWatchListApp/services/stock_fetcher.dart';
+
+import '../models/stock_info.dart';
+import '../services/stock_fetcher.dart';
 
 class WatchlistPage extends StatefulWidget {
   @override
@@ -17,10 +18,9 @@ class _WatchlistPageState extends State<WatchlistPage> {
   }
 
   void _fetchStocksInfo() async {
-    final stocksInfo1 = await StockFetcher.fetchStocks('GOOG');
-    final stocksInfo2 = await StockFetcher.fetchStocks('AAPL');
+    final stocksInfo = await StockFetcher.fetchStocks(['GOOG', 'AAPL', 'TSLA']);
     setState(() {
-      _stocksInfo = stocksInfo1;
+      _stocksInfo = stocksInfo;
     });
   }
 

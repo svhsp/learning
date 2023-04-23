@@ -1,43 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
-import '../models/stock_info.dart';
+import 'signup.dart';
+import 'watch_list.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<StockInfo> stocks = [StockInfo(symbol: 'AAPL', name: 'Apple Inc.', price: 125.90, change: 1.54),];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Stock Watchlist'),
+        title: Text('Login'),
       ),
-      body: SingleChildScrollView(
-        child: DataTable(
-          columns: const <DataColumn>[
-            DataColumn(label: Text('Symbol')),
-            DataColumn(label: Text('Name')),
-            DataColumn(label: Text('Price')),
-            DataColumn(label: Text('Change')),
-            DataColumn(label: Text('')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                // Navigate to the sign-up page
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SignUpPage()),
+                );
+              },
+              child: Text('Sign Up'),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // Navigate to the sign-in page
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => WatchlistPage()),
+                );
+              },
+              child: Text('Sign In'),
+            ),
           ],
-          rows: stocks
-              .map((stock) => DataRow(
-            cells: <DataCell>[
-              DataCell(Text(stock.symbol)),
-              DataCell(Text(stock.name)),
-              DataCell(Text(stock.price.toStringAsFixed(2))),
-              DataCell(Text(stock.change.toStringAsFixed(2))),
-
-            ],
-          ))
-              .toList(),
         ),
       ),
     );
