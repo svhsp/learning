@@ -14,10 +14,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'dart:math';
 import 'package:intl/intl.dart';
 import 'package:mongles/Widgets/stockclass.dart';
 import 'package:async/async.dart';
-
+void main(){
+  Future<List<Stocks>> result = getStock(['APE','SVB','KAB']);
+  result.then((value) => print("done")).catchError((value) => print("amogues"));
+}
 
 class StocksPage extends StatefulWidget {
   const StocksPage({super.key, required this.title});
@@ -29,24 +33,22 @@ class StocksPage extends StatefulWidget {
 
 class _StocksPageState extends State<StocksPage> {
   List<String> stockIds = ["APPL", "GAMESTOP", "SVB"];
-  List<Stocks> tempList = [];
   List<Stocks> stockList = [];
-  void getStockInfo(List<String> stockIds) async {
-    tempList = await getStock(stockIds);
+  List<Stocks> output69 = [];
+  void getStockInfo(List<String> stockIds) {
+    Future<List<Stocks>> tempList = getStock(stockIds);
+    tempList.then((value) => {output69 = value}).catchError((value) => print("sussy baka"));
     setState(() {
-      stockList = tempList;
+      stockList = output69;
     });
   }
   @override
-  void initState() {
+  Widget build(BuildContext context) {
     getStockInfo(stockIds);
     Timer timer = Timer.periodic(Duration(seconds: 15), (timer) {
       getStockInfo(stockIds);
     });
-    super.initState();
-  }
-  @override
-  Widget build(BuildContext context) {
+    // super.initState();
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -70,14 +72,21 @@ List<DataRow> buildTable(List<Stocks> stocks)  {
   List<DataRow> output = [];
   try {
     for (int i = 0; i < stocks.length; i++) {
-      Stocks newStock = stocks[i];
-      output.add(dataRow(newStock));
+      if (stocks[i].price == -69420){
+        output.add(DataRow(cells: [
+          DataCell(Row(children:[CircularProgressIndicator(),Text("  "+stocks[i].ticker_name, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red))])),
+          DataCell(Text("LOADING", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red))),
+          DataCell(Text("LOADING", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red))),
+        ]));
+        continue;
+      }
+      output.add(dataRow(stocks[i]));
     }
   } catch(e){
      output.add(DataRow(cells: [
-      DataCell(Text("NULL", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red))),
-      DataCell(Text("NULL", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red))),
-      DataCell(Text("NULL", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red))),
+      DataCell(CircularProgressIndicator()),
+      DataCell(Text("LOADING", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red))),
+      DataCell(Text("LOADING", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red))),
     ]));
   }
   return output;
@@ -104,6 +113,7 @@ DataRow dataRow(Stocks stockInfo) {
     ]);
 }
 
+
 Future<List<Stocks>> getStock(List<String> ids) async {
   List<Stocks> output1 = [];
   for (int i = 0; i<ids.length; i++) {
@@ -117,10 +127,10 @@ Future<List<Stocks>> getStock(List<String> ids) async {
       output1.add(Stocks(ids[i], price, percent));
     }
     catch (e) {
-      print(e);
-      output1.add(Stocks("NULL", -69, -69));
+      output1.add(Stocks(ids[i],-69420,-1));
     }
   }
+  print(output1);
   return output1;
 }
 

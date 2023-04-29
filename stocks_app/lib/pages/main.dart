@@ -7,6 +7,7 @@ import '../Resources/firebase_options.dart';
 import '../Resources/firebase_constants.dart';
 import 'emailandpassword sign in.dart';
 import 'stockpage.dart';
+import 'demo_future_builder.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
