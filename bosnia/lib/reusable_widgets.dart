@@ -71,6 +71,3 @@ hexStringColor(String hexColor) {
   }
   return Color(int.parse(hexColor, radix: 16));
 }
-
-// FirebaseFirestore.instance.collection('user_info').add({'email': _emailTextController, 'password': _passwordTextController, 'username': _usernameTextController});
-// },
