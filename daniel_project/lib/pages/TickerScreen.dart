@@ -33,15 +33,13 @@ class _TickerScreenState extends State<TickerScreen> {
           children: [
             Text(
               'Stocks',
-              style: TextStyle(color: Colors.black),
             ),
             IconButton(
               onPressed: () {},
-              icon: Icon(Icons.search, color: Colors.black),
+              icon: Icon(Icons.search),
             ),
           ],
         ),
-        backgroundColor: Colors.white70,
       ),
       body: SafeArea(
         child: FutureBuilder<List<Stock>>(
@@ -63,8 +61,6 @@ class _TickerScreenState extends State<TickerScreen> {
                 ]));
               }
               return DataTable(columns: columns, rows: rows);
-            } else if (snapshot.hasError) {
-              return Text('Error loading data');
             } else {
               return Center(child: CircularProgressIndicator());
             }
