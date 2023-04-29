@@ -11,7 +11,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:learning/pages/createacc.dart';
 import 'package:learning/pages/verification.dart';
 import 'package:learning/pages/login.dart';
+import 'package:learning/services/stock_fetch.dart';
 void main() async {
+  StockFetch;
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -19,9 +21,10 @@ void main() async {
     title: "Hi",
 
     initialRoute: '/',
+
     routes: {
       // '/': (context) => CreateAccount(),
-      '/': (context) => Login(),
+      '/': (context) => StockListPage(),
       '/login': (context) => Login(),
       '/verify': (context) => Verification(),
       '/StockList': (context) => StockListPage(),
