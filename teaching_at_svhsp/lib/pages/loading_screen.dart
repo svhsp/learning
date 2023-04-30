@@ -5,7 +5,7 @@ import 'package:teaching_at_svhsp/common/loading_page_flow.dart';
 import 'package:teaching_at_svhsp/pages/show_location_time_screen.dart';
 import 'package:teaching_at_svhsp/pages/stock_list_screen.dart';
 import 'package:teaching_at_svhsp/services/location.dart';
-import 'package:teaching_at_svhsp/widgets/stock_manager.dart';
+import 'package:teaching_at_svhsp/services/stock_manager.dart';
 
 import '../models/stock.dart';
 
