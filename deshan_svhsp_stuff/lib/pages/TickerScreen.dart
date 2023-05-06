@@ -39,7 +39,7 @@ class TickerScreenState extends State<TickerScreen> {
       links.add(mainPiece + link + "&apikey=YNGXUGMXQ93PLTF6");
     }
 
-    return FetchServices.getStockData(links);
+    return FetchServices.getStockData(links).catchError((error) => Text("Failed to collect stock data because of: " + error));
   }
   @override
   Widget build (BuildContext context) {
@@ -72,15 +72,22 @@ class TickerScreenState extends State<TickerScreen> {
 
                 for (int i = 0; i < rows.length; i++) {
                   DataRow row =  rows[i];
+                  print("ticker name: " + stock.ticker_name! + " cell value: " + row.cells[0].toString());
 
-
+                  if (stock.ticker_name == row.cells[0].toString()) {
+                    flag = true;
+                  }
                 }
 
-                rows.add(DataRow(cells: [
-                  DataCell(Text(stock.ticker_name)),
-                  DataCell(Text(stock.price)),
-                  DataCell(Text(stock.change)),
-                ]));
+                print("flag: " + flag.toString());
+
+                if (flag == false) {
+                  rows.add(DataRow(cells: [
+                    DataCell(Text(stock.ticker_name!)),
+                    DataCell(Text(stock.price!)),
+                    DataCell(Text(stock.change!)),
+                  ]));
+                }
             }
               return Column(
                 children: <Widget>[

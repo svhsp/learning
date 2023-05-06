@@ -5,7 +5,9 @@ import 'package:login/pages/profileScreen.dart';
 import 'package:login/pages/registerScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:login/services/fetchServices.dart';import 'models/stock.dart';
+import 'package:login/queryPage.dart';
+import 'package:login/services/fetchServices.dart';import 'models/result.dart';
+import 'models/stock.dart';
 import 'pages/TickerScreen.dart';
 import 'firebase_options.dart';
 
@@ -23,10 +25,11 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  List<String> test = List.empty(growable: true);
-  test.add('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=GOOG&apikey=G4UJ9ECYT8N1K1O6');
+  // List<String> test = List.empty(growable: true);
+  // test.add('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=GOOG&apikey=G4UJ9ECYT8N1K1O6');
 
-  FetchServices.getStockData(test);
+  // FetchServices.getStockData(test);
+  List<SearchResult> test = await FetchServices.getStockTickers('A');
 
   runApp(MyApp());
 }
@@ -38,12 +41,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/login',
+      initialRoute: '/query',
       routes: {
         '/login': (context) => LoginScreen(),
         '/register': (context) => RegisterScreen(),
         '/profile': (context) => ProfileScreen(),
         '/ticker': (context) => TickerScreen(),
+        '/query': (context) => QueryScreen(),
       },
     );
   }
