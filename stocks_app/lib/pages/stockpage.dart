@@ -18,14 +18,13 @@ import 'dart:math';
 import 'package:intl/intl.dart';
 import 'package:mongles/Widgets/stockclass.dart';
 import 'package:async/async.dart';
+List<String> stockIds = ["APPL", "TSLA", "AMZN"];
+
 void main(){
-  Future<List<Stocks>> result = getStock(['APE','SVB','KAB']);
+  Future<List<Stocks>> result = getStock(stockIds);
   result.then((value) => print("done")).catchError((value) => print("amogues"));
 }
 
-final List<String> allStocks = [
-  "APPL", "TSLA", "SIVBQ", "JPM", "GOOG", "AMZN", "NVDA"
-];
 class StocksPage extends StatefulWidget {
   const StocksPage({super.key, required this.title});
   final String title;
@@ -35,7 +34,6 @@ class StocksPage extends StatefulWidget {
 }
 
 class _StocksPageState extends State<StocksPage> {
-  List<String> stockIds = ["APPL", "GAMESTOP", "SVB"];
   List<Stocks> stockList = [];
   List<Stocks> output69 = [];
   void getStockInfo(List<String> stockIds) {
@@ -66,7 +64,7 @@ class _StocksPageState extends State<StocksPage> {
             ], rows: buildTable(stockList)),
             ElevatedButton(
                 onPressed: () {
-                  print("amogs");
+                  Navigator.pushNamed(context, '/search');
                 },
                 child: const Text('Search'),
                 style: ElevatedButton.styleFrom(
