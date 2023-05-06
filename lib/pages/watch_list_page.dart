@@ -11,11 +11,12 @@ class WatchlistPage extends StatefulWidget {
 
 
 class _WatchlistPageState extends State<WatchlistPage> {
-  Future<List<Map<String, String>>> future = StockFetcher('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=GOOG&apikey=G4UJ9ECYT8N1K1O6').getStocks();
+
 
   @override
   void initState() {
     super.initState();
+    Future<List<Map<String, String>>> future = StockFetcher('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=GOOG&apikey=G4UJ9ECYT8N1K1O6').getStocks();
     future.then((value) {
       setState(() {
         isReady = true;
