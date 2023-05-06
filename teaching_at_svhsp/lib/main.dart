@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:teaching_at_svhsp/common/loading_page_flow.dart';
 import 'package:teaching_at_svhsp/pages/choose_location_screen.dart';
 import 'package:teaching_at_svhsp/pages/loading_screen.dart';
+import 'package:teaching_at_svhsp/pages/bay_area_place_search_screen.dart';
 import 'package:teaching_at_svhsp/pages/show_location_time_screen.dart';
 import 'firebase_options.dart';
 
@@ -21,7 +22,7 @@ class TeachingApp4SVHSP extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: LoadingScreen.pageName,
+      initialRoute: BayAreaPlaceSearchScreen.pageName,
       title: 'Teaching App@SVHSP',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -31,6 +32,8 @@ class TeachingApp4SVHSP extends StatelessWidget {
             LoadingScreen(pageFlow: LoadingPageFlow.loadDefaultLocation),
         ShowLocationTimeScreen.pageName: (context) => ShowLocationTimeScreen(),
         ChooseLocationScreen.pageName: (context) => ChooseLocationScreen(),
+        BayAreaPlaceSearchScreen.pageName: (context) =>
+            BayAreaPlaceSearchScreen(),
       },
     );
   }
