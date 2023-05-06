@@ -23,6 +23,9 @@ void main(){
   result.then((value) => print("done")).catchError((value) => print("amogues"));
 }
 
+final List<String> allStocks = [
+  "APPL", "TSLA", "SIVBQ", "JPM", "GOOG", "AMZN", "NVDA"
+];
 class StocksPage extends StatefulWidget {
   const StocksPage({super.key, required this.title});
   final String title;
@@ -60,7 +63,16 @@ class _StocksPageState extends State<StocksPage> {
               DataColumn(label: Text("Symbol")),
               DataColumn(label: Text("Price")),
               DataColumn(label: Text("Change")),
-            ], rows: buildTable(stockList))
+            ], rows: buildTable(stockList)),
+            ElevatedButton(
+                onPressed: () {
+                  print("amogs");
+                },
+                child: const Text('Search'),
+                style: ElevatedButton.styleFrom(
+                  textStyle: TextStyle(fontSize:20),
+                )
+            )
           ],
         ),
       ),

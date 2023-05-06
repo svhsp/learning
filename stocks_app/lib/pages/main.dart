@@ -8,6 +8,7 @@ import '../Resources/firebase_constants.dart';
 import 'emailandpassword sign in.dart';
 import 'stockpage.dart';
 import 'demo_future_builder.dart';
+import 'search_stocks.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const MyHomePage(title: "Sign Up"),
         '/login': (context) => const loginPage(title: "Login"),
         '/homePage': (context) => const StocksPage(title: "Stock"),
+        '/homepage/search' : (context) => const
       },
     );
   }
