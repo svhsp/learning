@@ -5,6 +5,7 @@ import 'package:bosnia/models/stock.dart';
 import 'package:flutter/material.dart';
 
 class StockFetcher {
+
   static Future<List<Stock>> fetchStocks(List<String> tickers) async {
     List<Stock> returnValue = [];
     for (int i = 0; i < tickers.length; i++) {

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:bosnia/pages/stock_login_screen.dart';
 import '/pages/stock_list_screen.dart';
+import 'package:bosnia/pages/serach_bay_area_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,11 +16,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
+        /* STOCK APP ROUTES
         '/': (context) => const SignIn(),
         '/signUp': (context) => const SignUpScreen(),
         '/home': (context) => const HomePage(),
+        */
+        '/': (context) => const BayAreaSearch(),
       },
     );
   }
