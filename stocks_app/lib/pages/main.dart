@@ -46,7 +46,6 @@ class MyApp extends StatelessWidget {
         '/': (context) => const MyHomePage(title: "Sign Up"),
         '/login': (context) => const loginPage(title: "Login"),
         '/homePage': (context) => const StocksPage(title: "Stock"),
-        '/search' : (context) => const search_page(title:"Search for your stock"),
       },
     );
   }

@@ -18,12 +18,22 @@ import 'dart:math';
 import 'package:intl/intl.dart';
 import 'package:mongles/Widgets/stockclass.dart';
 import 'package:async/async.dart';
+import '../Resources/search_services.dart';
+
 List<String> stockIds = ["APPL", "TSLA", "AMZN"];
 
+final List<String> allStocks = [
+  "APPL", "TSLA", "SIVBQ", "JPM", "GOOG", "AMZN", "NVDA", "MSFT", "BRK.B", "GOOGL", "META", "UNH", "XOM"
+];
+
+final List<String> suggestedStocks = [
+  "APPL", "TSLA", "SIVBQ", "JPM", "GOOG", "AMZN", "NVDA"
+];
 void main(){
   Future<List<Stocks>> result = getStock(stockIds);
   result.then((value) => print("done")).catchError((value) => print("amogues"));
 }
+
 
 class StocksPage extends StatefulWidget {
   const StocksPage({super.key, required this.title});
@@ -45,11 +55,11 @@ class _StocksPageState extends State<StocksPage> {
   }
   @override
   Widget build(BuildContext context) {
+    String selectedStock = '';
     getStockInfo(stockIds);
     Timer timer = Timer.periodic(Duration(seconds: 15), (timer) {
       getStockInfo(stockIds);
     });
-    // super.initState();
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -57,20 +67,41 @@ class _StocksPageState extends State<StocksPage> {
       body: Center(
         child: Column(
           children: [
+            OutlinedButton.icon(
+              label: Text('Search'),
+              icon: Icon(Icons.search),
+              style: OutlinedButton.styleFrom(
+                  side: BorderSide(color: Colors.blue)
+              ),
+              onPressed: () async {
+                final res = await showSearch(
+                    context: context,
+                    delegate: SearchStock(
+                        stocks: allStocks, suggestedStocks: suggestedStocks
+                    )
+                );
+                setState(() {
+                  selectedStock = res;
+                });
+              },
+            ),
+            selectedStock == '' ? Container() :
+            Expanded(
+                child: ListView.builder(
+                  itemCount: allStocks.length,
+                  itemBuilder: (context, i) {
+                    return ListTile(
+                        title: Text(allStocks[i])
+                    );
+                  },
+                )
+            ),
+
             DataTable(columns: const [
               DataColumn(label: Text("Symbol")),
               DataColumn(label: Text("Price")),
               DataColumn(label: Text("Change")),
             ], rows: buildTable(stockList)),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/search');
-                },
-                child: const Text('Search'),
-                style: ElevatedButton.styleFrom(
-                  textStyle: TextStyle(fontSize:20),
-                )
-            )
           ],
         ),
       ),
