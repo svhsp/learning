@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teaching_at_svhsp/pages/search_ticker_screen.dart';
 
 import '../models/stock.dart';
 import '../widgets/stock_list.dart';
@@ -29,14 +30,19 @@ class StockListScreen extends StatelessWidget {
                     ),
                   ),
                   Expanded(child: Container()),
-                  Icon(
-                    Icons.add,
-                    size: 25,
+                  IconButton(
+                    icon: Icon(Icons.search),
+                    onPressed: () {
+                      showSearch(
+                        context: context,
+                        delegate: SearchTickerScreen(),
+                      );
+                    },
                   )
                 ],
               ),
               SizedBox(
-                height: 30,
+                height: 10,
               ),
               StockList(
                 stocks: stockList,

@@ -9,10 +9,18 @@ class StockList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DataTable(
+      horizontalMargin: 10,
+      columnSpacing: 100,
       columns: const [
-        DataColumn(label: Text("Symbol")),
-        DataColumn(label: Text("Price")),
-        DataColumn(label: Text("Change")),
+        DataColumn(
+          label: Text("Symbol"),
+        ),
+        DataColumn(
+          label: Text("Price"),
+        ),
+        DataColumn(
+          label: Text("Change"),
+        ),
       ],
       rows: buildTable(stocks),
     );

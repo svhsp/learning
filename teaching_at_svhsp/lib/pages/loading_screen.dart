@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:logger/logger.dart';
@@ -13,6 +15,8 @@ class LoadingScreen extends StatelessWidget {
   static const pageName = "/loading";
   final logger = Logger();
   final LoadingPageFlow pageFlow;
+  static List<String> stockTickers = [];
+
   StockManager stockManager = StockManager();
 
   LoadingScreen({Key? key, required this.pageFlow}) : super(key: key);
@@ -22,13 +26,21 @@ class LoadingScreen extends StatelessWidget {
         pageFlow == LoadingPageFlow.loadSelectedLocation) {
       fetchTimeByLocation(context);
     } else if (pageFlow == LoadingPageFlow.loadStocks) {
+      if (ModalRoute.of(context)!.settings.arguments != null) {
+        Map routeArgs = ModalRoute.of(context)!.settings.arguments as Map;
+        String newTicker = routeArgs['new_ticker'];
+        if (!stockTickers.contains(newTicker)) {
+          stockTickers.add(newTicker);
+        }
+      }
+
       fetchStock(context);
     }
   }
 
   void fetchStock(BuildContext context) async {
-    List<Stock> stockList =
-        await stockManager.fetchStocks(['SHOP', 'AAPL', 'BA']);
+    List<Stock> stockList = await stockManager.fetchStocks(stockTickers);
+
     // route to home page to show the time & location.
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(

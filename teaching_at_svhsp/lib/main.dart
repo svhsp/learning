@@ -22,14 +22,14 @@ class TeachingApp4SVHSP extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: BayAreaPlaceSearchScreen.pageName,
+      initialRoute: LoadingScreen.pageName,
       title: 'Teaching App@SVHSP',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       routes: {
         LoadingScreen.pageName: (context) =>
-            LoadingScreen(pageFlow: LoadingPageFlow.loadDefaultLocation),
+            LoadingScreen(pageFlow: LoadingPageFlow.loadStocks),
         ShowLocationTimeScreen.pageName: (context) => ShowLocationTimeScreen(),
         ChooseLocationScreen.pageName: (context) => ChooseLocationScreen(),
         BayAreaPlaceSearchScreen.pageName: (context) =>
