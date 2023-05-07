@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'SearchBayAreaPlacePage.dart';
+import 'SearchTickerScreen.dart';
+import 'StockSearchPage.dart';
 
 class BayAreaPlaces extends StatefulWidget {
   @override
@@ -22,13 +24,16 @@ class _BayAreaPlacesState extends State<BayAreaPlaces> {
             IconButton(
               icon: Icon(Icons.search),
               onPressed: () async {
-                final result = await showSearch(
-                  context: context,
-                  delegate: SearchBayAreaPlacePage(places: _places),
-                );
-                setState(() {
-                  _searchResult = result!;
-                });
+
+                  final finalResult = (await showSearch(
+                      context: context,
+                      delegate: SearchLocations(Stocks: Stocks,
+                          MainStocks: MainStocks)
+                  )
+                  );
+                  setState(() {
+                    // selectedPlace = finalResult!;
+                  });
               },
             ),
           ],

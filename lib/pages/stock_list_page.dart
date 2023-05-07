@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:learning/models/stock_info.dart';
 import 'package:learning/services/stock_fetch.dart';
 import 'package:learning/widgets/stock_card.dart';
+import 'package:learning/pages/SearchTickerScreen.dart';
+import 'StockSearchPage.dart';
 
 
 bool isReady = false;
@@ -51,6 +53,22 @@ class _StockListPageState extends State<StockListPage> {
           ),
           centerTitle: true,
           elevation: 0,
+          actions: [
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () async {
+                final finalResult = await showSearch(
+                    context: context,
+                    delegate: SearchLocations(
+                        Stocks: Stocks,
+                        MainStocks: MainStocks));
+                setState(() {
+                  // selectedPlace = finalResult!;
+                });
+
+              },
+            ),
+          ],
         ),
         body: isReady
             ? Container(
