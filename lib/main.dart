@@ -20,11 +20,6 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  List<String> test = List.empty(growable: true);
-  test.add('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=GOOG&apikey=G4UJ9ECYT8N1K1O6');
-
-  FetchServices.getStockData(test);
-
   runApp(MyApp());
 }
 
@@ -33,7 +28,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //initialRoute: '/login',
+      initialRoute: '/login',
       home: Home(),
       routes: {
         '/login': (context) => const LoginScreen(),
