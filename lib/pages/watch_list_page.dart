@@ -56,8 +56,12 @@ class _WatchlistPageState extends State<WatchlistPage> {
         ],
       ),
       body: Center(
-        child: Container(
-          child: isReady ? MyDataTable(): CircularProgressIndicator(),
+        child: Column(
+          children: [
+            Container(
+              child: isReady ? MyDataTable(): CircularProgressIndicator(),
+            ),
+          ],
         ),
       ),
     );
