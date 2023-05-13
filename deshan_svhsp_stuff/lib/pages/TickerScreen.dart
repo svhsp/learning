@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:login/services/DatabaseServices.dart';
 
 import '../models/stock.dart';
+import '../query.dart';
 import '../services/fetchServices.dart';
 
 class loggedInID {
@@ -22,11 +23,28 @@ class TickerScreen extends StatefulWidget {
 // Stock class format: ticker name, price, change
 
 class TickerScreenState extends State<TickerScreen> {
+  List<String> searchResults = [
+    "AMD",
+    "APPL",
+    "MSFT",
+    "M",
+    "GOOG",
+  ];
+
+  List<String> searchSuggestions = [
+    "AMD",
+    "APPL",
+    "MSFT",
+    "M",
+    "GOOG",
+  ];
+  List<String> alreadyPutIn = List.empty(growable: true);
   List<DataColumn> columns = new List.empty(growable: true);
   List<DataRow> rows = List.empty(growable: true);
   late Future<List<Stock>> asyncStockData;
 
   Future<List<Stock>> fetch (String userId) async {
+    print("I WENT IN THE FUNCTIONOISDHFIOU");
     // get url
     // get stocks
     // piece links
@@ -34,6 +52,7 @@ class TickerScreenState extends State<TickerScreen> {
     String mainPiece = await a.getUrl();
     List<String> links = List.empty(growable: true);
     List<String>? stonks = await a.getUserPreferences(userId);
+    print("STONKS: " + stonks.toString());
 
     for (String link in stonks!) {
       links.add(mainPiece + link + "&apikey=YNGXUGMXQ93PLTF6");
@@ -41,6 +60,9 @@ class TickerScreenState extends State<TickerScreen> {
 
     return FetchServices.getStockData(links).catchError((error) => Text("Failed to collect stock data because of: " + error));
   }
+
+  @override
+
   @override
   Widget build (BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as loggedInID;
@@ -49,9 +71,18 @@ class TickerScreenState extends State<TickerScreen> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
 
-    return Scaffold(appBar: AppBar(title: Row(children: [Text('Stocks', style: TextStyle(color: Colors.black),), IconButton(onPressed: () {
-
-    }, icon: Icon(Icons.search, color: Colors.black,))],), backgroundColor: Colors.white70,), body:SafeArea(child: Column(children: [
+    return Scaffold(appBar: AppBar(title:
+    Row(children: [
+      Text('Stocks', style: TextStyle(color: Colors.black),), SizedBox(width: 260,), IconButton(onPressed: () async {
+        final finalResult = await showSearch(context: context, delegate: SearchLocations(allCaliforniaPlaces: searchResults, allCaliforniaSuggestions: searchSuggestions));
+        List<String>? stockList = await a.getUserPreferences(args.id);
+        setState(() {
+          FirebaseFirestore.instance.collection("preferences").doc(args.id).delete().onError((error, stackTrace) => print("error updating document"));
+          stockList!.add(finalResult.toString());
+          FirebaseFirestore.instance.collection("preferences").doc(args.id).set({"stocks" : stockList});
+        });
+    }, icon: Icon(Icons.search, color: Colors.black,)),
+    ],), backgroundColor: Colors.white70,), body:SafeArea(child: Column(children: [
       SizedBox(width: 1,  height: 30,),
       Column(
         children: <Widget>[
@@ -72,16 +103,16 @@ class TickerScreenState extends State<TickerScreen> {
 
                 for (int i = 0; i < rows.length; i++) {
                   DataRow row =  rows[i];
-                  print("ticker name: " + stock.ticker_name! + " cell value: " + row.cells[0].toString());
+                  print("CURRENT DATAROW" + row.toString());
 
-                  if (stock.ticker_name == row.cells[0].toString()) {
-                    flag = true;
-                  }
                 }
 
-                print("flag: " + flag.toString());
+                print("contents: " + alreadyPutIn.toString());
+                print("flag: " + alreadyPutIn.contains(stock.ticker_name!).toString());
 
-                if (flag == false) {
+                if (!alreadyPutIn.contains(stock.ticker_name!)) {
+                  alreadyPutIn.add(stock.ticker_name!);
+                  print("PASED: " + stock.ticker_name!);
                   rows.add(DataRow(cells: [
                     DataCell(Text(stock.ticker_name!)),
                     DataCell(Text(stock.price!)),

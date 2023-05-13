@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
@@ -63,30 +64,43 @@ class FetchServices {
   }
 
   static Future<List<SearchResult>> getStockTickers (String query) async {
-    String link = 'http://20.169.4.151:3000/query?keyword=' + query;
+    String link = 'https://finnhub.io/api/v1/search?q=' + query + '&token=cgu3hqpr01qu2uq5p73gcgu3hqpr01qu2uq5p740';
     final dio = Dio();
     List<SearchResult> results = List.empty(growable: true);
 
     final response = await dio.get(link);
-    List<dynamic> mappedData = response.data;
-    List<dynamic> test = List.empty(growable: false);
+    Map<String, dynamic> mappedData = response.data;
+    List<dynamic> searchResult = mappedData['result'];
+    print("MAPPED ATA: " + searchResult[0].toString());
 
-    try {
-      print('RESULT: ' + mappedData.toString());
-      for (Map i in mappedData[0]['bestMatches']) {
-        if (i['1. symbol'].toString() != "" && i['2. name'].toString() != "" && i['1. symbol'].toString() != null && i['2. name'].toString() != null) {
-          SearchResult temp = SearchResult(i['1. symbol'], i['2. name']);
-          results.add(temp);
-          print(temp.toString());
-        } else {
-          break;
-        }
-      }
-    } on RangeError {
-      print('cannot fetch tickers because results are nonexistent according to query');
-      List<SearchResult> noPass = List.empty(growable: false);
-      return noPass;
+    if (searchResult.length == 0) {
+      return results;
     }
+
+    int theLength = min(searchResult.length, 5);
+
+    for (int i = 0; i < theLength; i++) {
+      SearchResult temp = new SearchResult(searchResult[i]['symbol'], searchResult[i]['description']);
+      results.add(temp);
+    }
+    return results;
+
+    // try {
+    //   print('RESULT: ' + mappedData.toString());
+    //   for (Map i in mappedData[0]['bestMatches']) {
+    //     if (i['1. symbol'].toString() != "" && i['2. name'].toString() != "" && i['1. symbol'].toString() != null && i['2. name'].toString() != null) {
+    //       SearchResult temp = SearchResult(i['1. symbol'], i['2. name']);
+    //       results.add(temp);
+    //       print(temp.toString());
+    //     } else {
+    //       break;
+    //     }
+    //   }
+    // } on RangeError {
+    //   print('cannot fetch tickers because results are nonexistent according to query');
+    //   List<SearchResult> noPass = List.empty(growable: false);
+    //   return noPass;
+    // }
 
     return results;
   }
