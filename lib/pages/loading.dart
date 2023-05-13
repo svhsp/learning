@@ -17,7 +17,7 @@ class Loading extends StatefulWidget {
   Loading({Key? key, required this.app}) : super(key: key);
 
 
-  List<String> tickers = ['AAPL', 'GOOGL'];
+  static List<String> tickers = [];
 
   @override
   State<Loading> createState() => _LoadingState();
@@ -31,7 +31,17 @@ class _LoadingState extends State<Loading> {
   //ASYNC API CALL with getStockInfo
   void verifyApp(BuildContext context) async {
     if (widget.app == 'stock') {
-      getStockInfo(widget.tickers);
+      if (ModalRoute.of(context)!.settings.arguments != null) {
+        Map routeArgs = ModalRoute
+            .of(context)!
+            .settings
+            .arguments as Map;
+        String newTicker = routeArgs['new_ticker'];
+        if (!Loading.tickers.contains(newTicker)) {
+          Loading.tickers.add(newTicker);
+        }
+      }
+      getStockInfo(Loading.tickers);
     } else if (widget.app == 'world_time') {
       fetchWorldTime();
     }

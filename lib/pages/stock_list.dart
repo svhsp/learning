@@ -30,6 +30,7 @@ class _StockListPageState extends State<StockListPage> {
     print('build');
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.lightGreen,
           elevation: 0,
           centerTitle: true,
@@ -38,7 +39,7 @@ class _StockListPageState extends State<StockListPage> {
               "Watch List",
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(width: 200),
+            SizedBox(width: 210),
             IconButton(onPressed: () async {
               final finalResult = (await showSearch(
                   context: context,

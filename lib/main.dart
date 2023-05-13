@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         //Default Page
-        '/': (context) => const SignInScreen(),
+        '/': (context) => SignInScreen(),
 
         //Stock App Routes
         '/loading': (context) => Loading(app: 'world_time'),

@@ -6,6 +6,6 @@ class StockInfo {
   late Map data;
 
   StockInfo({required this.tickerName, required this.percentageChange, required this.price});
-  StockInfo.Search({required this.tickerName, required this.companyName});
+  StockInfo.search({required this.tickerName, required this.companyName});
 
 }

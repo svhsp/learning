@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../models/stock_info.dart';
 import '../services/stock_fetcher.dart';
+import 'loading.dart';
 
 class StockSearch extends SearchDelegate<String> {
   final List<String> all_stocks;
   final List<String> suggested_stocks;
 
   StockSearch({required this.all_stocks, required this.suggested_stocks});
+
+  StockFetcher searcher = StockFetcher();
 
   @override
   String get searchFieldLabel => 'Search for a stock';
@@ -56,47 +59,44 @@ class StockSearch extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    List<StockInfo> allSuggestions = List.empty(growable: true);
-    StockFetcher searcher = StockFetcher();
 
-    if (query != '') {
-      return FutureBuilder(
-          future: searcher.fetchStocks([]),   //fix
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              print("TYPE: " + snapshot.data!.runtimeType.toString());
-              for (StockInfo result in snapshot.data!) {
-                if (allSuggestions.contains(result) == false) {
-                  allSuggestions.add(result);
-                }
-              }
-
-              print("SUGGESTIONS: " + allSuggestions.toString());
-
-              return ListView.builder(
-                  itemCount: allSuggestions.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(allSuggestions[index].tickerName),
-                        trailing: Text(allSuggestions[index].companyName),
-                      onTap: () {
-                        query = allSuggestions[index].tickerName;
-                        close(context, query);
-                      },
-                    );
-                  });
-            } else if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError) {
-              return Text("There is an error: " + snapshot.error.toString());
-            } else {
-              return Text("Contact Support");
-            }
-          });
-    } else {
-      return ListTile(
-        title: Text('No results'),
-      );
+    if (query == ''){
+      return Container();
     }
-  }
-}
+
+    return FutureBuilder<List<StockInfo>>(
+        future: searcher.searchStocks(query),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return ListView.builder(
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(snapshot.data![index].tickerName),
+                  trailing: Text(snapshot.data![index].companyName),
+                  onTap: () {
+                    query = snapshot.data![index].tickerName;
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            Loading(app: 'stock'),
+                        settings: RouteSettings(arguments: {
+                          'new_ticker': query,
+                        }),
+                      ),
+                    );
+                  },
+                );
+              },
+              itemCount: snapshot.data!.length,
+            );
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        }
+        );
+    }
+    }
+
+
