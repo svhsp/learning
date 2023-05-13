@@ -3,8 +3,9 @@ import 'package:stonks/services/stock_fetcher.dart';
 import 'models/signup.dart';
 import 'models/login.dart';
 import 'pages/home_page.dart';
+import 'services/global_var.dart';
 void main() {
-  StockFetcher('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=GOOG&apikey=G4UJ9ECYT8N1K1O6');
+  print(StockFetcher('https://finnhub.io/api/v1/search?q=AAPL&token=cgu3hqpr01qu2uq5p73gcgu3hqpr01qu2uq5p740'));
   runApp(MaterialApp(
     title: 'Flutter Login Demo',
     initialRoute: '/',
