@@ -2,11 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/pages/signup.dart';
 import 'package:untitled/pages/watch_list.dart';
-import 'package:firebase_core/firebase_core.dart';
+//import 'package:firebase_core/firebase_core.dart';
 import '../models/stock_info.dart';
-import 'PopularPlacesInCali.dart';
-import 'datatable_test.dart';
-import 'home_page.dart';
+import 'pages/PopularPlacesInCali.dart';
+import 'pages/datatable_test.dart';
+import 'pages/home_page.dart';
 
 void main() async {
   //await Firebase.initializeApp();
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (context) => BayAreaPlaces(),
+        '/': (context) => WatchlistPage(),
         '/signUp': (context) => SignUpPage(),
         '/home': (context) => HomePage(),
       },

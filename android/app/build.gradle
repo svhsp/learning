@@ -34,9 +34,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    defaultConfig {
-        minSdkVersion 19
-    }
+
 
     kotlinOptions {
         jvmTarget = '1.8'
@@ -55,6 +53,9 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        minSdkVersion 19
+        multiDexEnabled true
+
     }
 
     buildTypes {
@@ -73,19 +74,20 @@ flutter {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     // Import the Firebase BoM
-    implementation platform('com.google.firebase:firebase-bom:31.3.0')
+    //implementation platform('com.google.firebase:firebase-bom:31.3.0')
+    implementation "androidx.multidex:multidex:2.0.1"
 
     // When using the BoM, you don't specify versions in Firebase library dependencies
 
     // Add the dependency for the Firebase SDK for Google Analytics
-    implementation 'com.google.firebase:firebase-analytics'
+    //implementation 'com.google.firebase:firebase-analytics'
 
     // TODO: Add the dependencies for any other Firebase products you want to use
     // See https://firebase.google.com/docs/android/setup#available-libraries
     // For example, add the dependencies for Firebase Authentication and Cloud Firestore
-    implementation 'com.google.firebase:firebase-auth'
-    implementation 'com.google.firebase:firebase-firestore'
-    implementation platform('com.google.firebase:firebase-bom:31.3.0')
-    implementation 'com.google.android.gms:play-services-auth:20.4.1'
+    //implementation 'com.google.firebase:firebase-auth'
+    //implementation 'com.google.firebase:firebase-firestore'
+    //implementation platform('com.google.firebase:firebase-bom:31.3.0')
+    //implementation 'com.google.android.gms:play-services-auth:20.4.1'
 
 }

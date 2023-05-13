@@ -50,7 +50,7 @@ class SearchBayAreaPlacePage extends SearchDelegate<String> {
     final results = places.where((place) => place.toLowerCase().contains(query.toLowerCase())).toList();
 
     return ListView.builder(
-      itemCount: results.length,
+      itemCount: 3,
       itemBuilder: (context, index) {
         final place = results[index];
         return ListTile(

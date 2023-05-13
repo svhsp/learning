@@ -3,14 +3,17 @@ class StockInfo {
   late final String name;
   late final double price;
   late final double change;
-
+  late final String description;
   StockInfo({
     required this.symbol,
     required this.name,
     required this.price,
     required this.change,
   });
-
+  StockInfo.withDescription({
+    required this.symbol,
+    required this.description,
+  });
   factory StockInfo.fromJson(Map<String, dynamic> json) {
     return StockInfo(
       symbol: json['symbol'],

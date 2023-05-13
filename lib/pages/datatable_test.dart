@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../main.dart';
 import '../models/stock_info.dart';
 import '../services/stock_fetcher.dart';
-import 'main.dart';
 void main(){
   runApp(MyApp());
   Future<StockInfo> list = StockFetcher.fetchStocks(['AMAT']) as Future<StockInfo>;

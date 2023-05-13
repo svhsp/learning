@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+
 import '../models/stock_info.dart';
 
 class StockFetcher {
@@ -12,16 +13,19 @@ class StockFetcher {
     for (String company in companies) {
       final response = await http.get(Uri.parse(_baseUrl1 + company + _baseUrl2));
       final Map<String, dynamic> data = json.decode(response.body);
-      final stockData = data['Global Quote'];
 
-      stocksInfo.add(
-        StockInfo(
-          symbol: stockData['01. symbol'],
-          name: '',
-          price: double.parse(stockData['05. price']),
-          change: double.parse(stockData['09. change']),
-        ),
-      );
+      if (data.containsKey('Global Quote')) {
+        final stockData = data['Global Quote'];
+
+        stocksInfo.add(
+          StockInfo(
+            symbol: stockData['01. symbol'],
+            name: '',
+            price: double.parse(stockData['05. price']),
+            change: double.parse(stockData['09. change']),
+          ),
+        );
+      }
     }
 
     return stocksInfo;

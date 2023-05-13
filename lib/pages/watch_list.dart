@@ -2,8 +2,25 @@ import 'package:flutter/material.dart';
 
 import '../models/stock_info.dart';
 import '../services/stock_fetcher.dart';
+import 'stock_search_delegate.dart';
 
-class WatchlistPage extends StatelessWidget {
+class WatchlistPage extends StatefulWidget {
+  @override
+  _WatchlistPageState createState() => _WatchlistPageState();
+  static List<String> stockList = ['AAPL'];
+
+  static void addStock(StockInfo stock) {
+    stockList.add(stock.symbol);
+  }
+}
+
+class _WatchlistPageState extends State<WatchlistPage> {
+  void onStockSelected(StockInfo stock) {
+    setState(() {
+      WatchlistPage.addStock(stock);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,18 +30,19 @@ class WatchlistPage extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () {
-              // Add your search functionality here
+              showSearch(
+                context: context,
+                delegate: StockSearchDelegate(onStockSelected: onStockSelected),
+              );
             },
           ),
         ],
       ),
       body: FutureBuilder<List<StockInfo>>(
-        future: StockFetcher.fetchStocks(['GOOG', 'AAPL', 'TSLA']),
+        future: StockFetcher.fetchStocks(WatchlistPage.stockList),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
           } else {
             final stocksInfo = snapshot.data!;
             return SingleChildScrollView(
@@ -35,13 +53,17 @@ class WatchlistPage extends StatelessWidget {
                   DataColumn(label: Text('Price')),
                   DataColumn(label: Text('Change')),
                 ],
-                rows: stocksInfo.map((stock) => DataRow(
-                  cells: [
-                    DataCell(Text(stock.symbol)),
-                    DataCell(Text(stock.price.toStringAsFixed(2))),
-                    DataCell(Text(stock.change.toStringAsFixed(2))),
-                  ],
-                )).toList(),
+                rows: stocksInfo
+                    .map(
+                      (stock) => DataRow(
+                    cells: [
+                      DataCell(Text(stock.symbol)),
+                      DataCell(Text(stock.price.toStringAsFixed(2))),
+                      DataCell(Text(stock.change.toStringAsFixed(2))),
+                    ],
+                  ),
+                )
+                    .toList(),
               ),
             );
           }
@@ -50,76 +72,3 @@ class WatchlistPage extends StatelessWidget {
     );
   }
 }
-// import 'package:flutter/material.dart';
-//
-// import '../models/stock_info.dart';
-// import '../services/stock_fetcher.dart';
-//
-// void main() {
-//   List<String> tickers = ['AAPL', 'GOOGL'];
-//   runApp(WatchListPage());
-// }
-//
-// bool isReady = false;
-//
-// class WatchListPage extends StatefulWidget {
-//   @override
-//   _WatchListPageState createState() => _WatchListPageState();
-// }
-//
-// class _WatchListPageState extends State<WatchListPage> {
-//   List<DataRow> rows = List.empty(growable: true);
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     List<String> tickers = ['AAPL', 'GOOGL'];
-//     Future<List<StockInfo>> future = StockFetcher.fetchStocks(tickers);
-//     future.then((value) {
-//       for (int i = 0; i < value.length; i++) {
-//         rows.add(
-//           DataRow(cells: <DataCell>[
-//             DataCell(Text(value[i].name)),
-//             DataCell(Text(value[i].price as String)),
-//             DataCell(Text(value[i].change as String)),
-//           ]),
-//         );
-//       }
-//       setState(() {
-//         isReady = true;
-//       });
-//     });
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       home: Scaffold(
-//         appBar: AppBar(
-//           title: Text(
-//             'Watchlist',
-//             style: TextStyle(
-//               fontSize: 30,
-//               fontWeight: FontWeight.bold,
-//               color: Colors.black,
-//             ),
-//           ),
-//           centerTitle: true,
-//           elevation: 0,
-//         ),
-//         body: isReady
-//             ? Container(
-//           child: DataTable(
-//             columns: [
-//               DataColumn(label: Text('Ticker')),
-//               DataColumn(label: Text('Price')),
-//               DataColumn(label: Text('Percent Change')),
-//             ],
-//             rows: rows,
-//           ),
-//         )
-//             : Center(child: CircularProgressIndicator()),
-//       ),
-//     );
-//   }
-// }
