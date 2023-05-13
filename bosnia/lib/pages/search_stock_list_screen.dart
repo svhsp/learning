@@ -61,6 +61,7 @@ class _StockSearchState extends State<StockSearch> {
                 side: BorderSide(color: Colors.blue)
             ),
             onPressed: () async {
+              isReady = false;
               final res = await showSearch(
                   context: context,
                   delegate: SearchLocations(
@@ -109,8 +110,12 @@ final List<String> stocks = [
   "AMZN",
   "GOOGL",
   "KO",
+  "META",
   "MSFT",
+  "NFLX",
+  "NVDA",
   "TSLA",
+  "WMT",
 ];
 
 
