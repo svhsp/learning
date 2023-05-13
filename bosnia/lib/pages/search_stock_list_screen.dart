@@ -74,7 +74,9 @@ class _StockSearchState extends State<StockSearch> {
       body: Center(
         child:Column(
           children: [
-            selectedStock == '' ? Container(
+            selectedStock == '' ?
+            Expanded(
+              child: Container(
               child: DataTable(
                 columns: const [
                   DataColumn(label: Text('Ticker')),
@@ -83,20 +85,23 @@ class _StockSearchState extends State<StockSearch> {
                 ],
                 rows: selectedStockValue,
               ),
+            ),
             ) :
-            Container(
-              child: isReady
-              ? Container(
-              child: DataTable(
-                columns: const [
-                  DataColumn(label: Text('Ticker')),
-                  DataColumn(label: Text('Price')),
-                  DataColumn(label: Text('Percent Change')),
-                ],
-                rows: selectedStockValue,
-                ),
-              )
-                  : Loading().load,
+            Expanded(
+              child: Container(
+                child: isReady
+                ? Container(
+                child: DataTable(
+                  columns: const [
+                    DataColumn(label: Text('Ticker')),
+                    DataColumn(label: Text('Price')),
+                    DataColumn(label: Text('Percent Change')),
+                  ],
+                  rows: selectedStockValue,
+                  ),
+                )
+                    : Loading().load,
+              ),
             ),
           ],
         ),
