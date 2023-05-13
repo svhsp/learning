@@ -65,7 +65,7 @@ class _StockSearchState extends State<StockSearch> {
               final res = await showSearch(
                   context: context,
                   delegate: SearchLocations(
-                      locations: stocks, suggestedLocations: suggestedStocks
+                      searchElements: stocks, suggestedSearchElements: suggestedStocks
                   )
               );
               setState(() {

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class SearchLocations extends SearchDelegate {
 
-  final List<String> locations;
-  final List<String> suggestedLocations;
+  final List<String> searchElements;
+  final List<String> suggestedSearchElements;
 
-  SearchLocations({required this.locations, required this.suggestedLocations});
+  SearchLocations({required this.searchElements, required this.suggestedSearchElements});
 
   @override
   List<Widget>? buildActions(BuildContext context) {
@@ -29,7 +29,7 @@ class SearchLocations extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    final List<String> searchedLocations = locations.where(
+    final List<String> searchedLocations = searchElements.where(
       (location) => location.toLowerCase().contains(
         query.toLowerCase(),
       ),
@@ -49,7 +49,7 @@ class SearchLocations extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    final List<String> searchedSuggestedLocations = suggestedLocations.where(
+    final List<String> searchedSuggestedLocations = suggestedSearchElements.where(
           (suggestedLocation) => suggestedLocation.toLowerCase().contains(
         query.toLowerCase(),
       ),

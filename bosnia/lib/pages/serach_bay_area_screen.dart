@@ -38,7 +38,7 @@ class _BayAreaSearchState extends State<BayAreaSearch> {
               final res = await showSearch(
                   context: context,
                   delegate: SearchLocations(
-                      locations: locations, suggestedLocations: suggestedLocations
+                      searchElements: locations, suggestedSearchElements: suggestedLocations
                   )
               );
               setState(() {
