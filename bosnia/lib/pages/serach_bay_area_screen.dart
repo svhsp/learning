@@ -1,4 +1,4 @@
-import 'package:bosnia/pages/search_bay_area_search_screen.dart';
+import 'package:bosnia/pages/search_delegate_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -171,8 +171,8 @@ final List<String> locations = [
 final List<String> suggestedLocations = [
   "Almaden",
   "Fremont",
-  "Los Gatos"
-      "Mountain View",
+  "Los Gatos",
+  "Mountain View",
   "Morgan Hill",
   "Palo Alto",
   "San Francisco",

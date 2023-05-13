@@ -1,3 +1,4 @@
+import 'package:bosnia/pages/search_stock_list_screen.dart';
 import 'package:bosnia/pages/stock_signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -24,7 +25,10 @@ class MyApp extends StatelessWidget {
         '/signUp': (context) => const SignUpScreen(),
         '/home': (context) => const HomePage(),
         */
+        /* BAY AREA SEARCH ROUTES
         '/': (context) => const BayAreaSearch(),
+        */
+        '/': (context) => const StockSearch(),
       },
     );
   }

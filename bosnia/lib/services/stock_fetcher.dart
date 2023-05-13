@@ -24,4 +24,20 @@ class StockFetcher {
     }
     return returnValue;
   }
+
+  static Future<Stock> fetchStock(String ticker) async {
+    Stock ret;
+    http.Response dataResponse = await http.get(Uri.parse(
+        "https://finnhub.io/api/v1/quote?symbol=$ticker&token=ch21rb1r01qroac5qu90ch21rb1r01qroac5qu9g"));
+    Map data = jsonDecode(dataResponse.body);
+    print(data);
+    double percent = data["dp"];
+    double price = data["c"];
+    ret = Stock(
+      ticker: ticker,
+      price: price,
+      percentageChange: percent,
+    );
+    return ret;
+  }
 }
