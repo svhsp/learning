@@ -22,18 +22,17 @@ class _StockSearchState extends State<StockSearch> {
   late List<DataRow> selectedStockValue = [];
 
   void getStock() async {
-    selectedStockValue.clear();
     Future<Stock> future = StockFetcher.fetchStock(selectedStock);
     future.then((value) {
       selectedStockValue.add(
-          DataRow(cells: <DataCell>[
-            DataCell(Text(value.ticker)),
-            DataCell(Text(value.price)),
-            DataCell(
-                value.percentageChange.contains('-')?
-                Text(value.percentageChange, style: const TextStyle(color: Colors.red,)) :
-                Text('+${value.percentageChange}', style: const TextStyle(color: Colors.green,))),
-          ]));
+        DataRow(cells: <DataCell>[
+          DataCell(Text(value.ticker)),
+          DataCell(Text(value.price)),
+          DataCell(
+              value.percentageChange.contains('-')?
+              Text('${value.percentageChange}%', style: const TextStyle(color: Colors.red,)) :
+              Text('+${value.percentageChange}%', style: const TextStyle(color: Colors.green,))),
+        ]));
       setState(() {
         isReady = true;
       });
@@ -49,24 +48,19 @@ class _StockSearchState extends State<StockSearch> {
               fontSize: 20,
               color: Colors.white,
             )),
-        centerTitle: true,
-      ),
-      body: Column(
-        children: [
+        actions: [
           OutlinedButton.icon(
-            label: Text('Search'),
-            icon: Icon(Icons.search),
+            label: const Text('Search'),
+            icon: const Icon(Icons.search),
             style: OutlinedButton.styleFrom(
                 primary: Colors.deepOrange,
-                side: BorderSide(color: Colors.blue)
+                side: const BorderSide(color: Colors.blue)
             ),
             onPressed: () async {
               isReady = false;
               final res = await showSearch(
-                  context: context,
-                  delegate: SearchLocations(
-                      searchElements: stocks, suggestedSearchElements: suggestedStocks
-                  )
+                context: context,
+                delegate: SearchStocks(),
               );
               setState(() {
                 selectedStock = res;
@@ -74,53 +68,39 @@ class _StockSearchState extends State<StockSearch> {
               });
             },
           ),
-          selectedStock == '' ? Container() :
-          Container(
-            child: isReady
-            ? Container(
-            child: DataTable(
-              columns: const [
-                DataColumn(label: Text('Ticker')),
-                DataColumn(label: Text('Price')),
-                DataColumn(label: Text('Percent Change')),
-              ],
-              rows: selectedStockValue,
-              ),
-            )
-                : Loading().load,
-          ),
-          Expanded(
-              child: ListView.builder(
-                itemCount: stocks.length,
-                itemBuilder: (context, idx) {
-                  return ListTile(
-                      title: Text(stocks[idx])
-                  );
-                },
-              ))
         ],
+        centerTitle: true,
+      ),
+      body: Center(
+        child:Column(
+          children: [
+            selectedStock == '' ? Container(
+              child: DataTable(
+                columns: const [
+                  DataColumn(label: Text('Ticker')),
+                  DataColumn(label: Text('Price')),
+                  DataColumn(label: Text('Percent Change')),
+                ],
+                rows: selectedStockValue,
+              ),
+            ) :
+            Container(
+              child: isReady
+              ? Container(
+              child: DataTable(
+                columns: const [
+                  DataColumn(label: Text('Ticker')),
+                  DataColumn(label: Text('Price')),
+                  DataColumn(label: Text('Percent Change')),
+                ],
+                rows: selectedStockValue,
+                ),
+              )
+                  : Loading().load,
+            ),
+          ],
+        ),
       ),
     );
   }
 }
-
-
-final List<String> stocks = [
-  "AAPL",
-  "AMZN",
-  "GOOGL",
-  "KO",
-  "META",
-  "MSFT",
-  "NFLX",
-  "NVDA",
-  "TSLA",
-  "WMT",
-];
-
-
-final List<String> suggestedStocks = [
-  "AAPL",
-  "GOOGL",
-  "TSLA",
-];

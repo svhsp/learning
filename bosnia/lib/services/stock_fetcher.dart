@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:http/http.dart' as http;
 import 'package:bosnia/models/stock.dart';
@@ -39,5 +40,19 @@ class StockFetcher {
       percentageChange: percent,
     );
     return ret;
+  }
+
+  Future<List<String>> searchStock(String ticker) async {
+    List<String> stocks = [];
+    http.Response response = await http.get(Uri.parse(
+        'https://finnhub.io/api/v1/search?q=$ticker&token=cgu3hqpr01qu2uq5p73gcgu3hqpr01qu2uq5p740'));
+    Map<String, dynamic> data = jsonDecode(response.body);
+    int itemCount = min(data['result'].length, 3);
+    for (int i = 0; i < itemCount; i++) {
+      Map<String, dynamic> item = data['result'][i];
+      // logger.log(Level.info, data);
+      stocks.add("${item['symbol']}");
+    }
+    return stocks;
   }
 }
