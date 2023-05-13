@@ -50,11 +50,11 @@ class _StockSearchState extends State<StockSearch> {
             )),
         actions: [
           OutlinedButton.icon(
-            label: const Text('Search'),
+            label: const Text(''),
             icon: const Icon(Icons.search),
             style: OutlinedButton.styleFrom(
-                primary: Colors.deepOrange,
-                side: const BorderSide(color: Colors.blue)
+                primary: Colors.white,
+                side: const BorderSide(color: Colors.blueAccent)
             ),
             onPressed: () async {
               isReady = false;
