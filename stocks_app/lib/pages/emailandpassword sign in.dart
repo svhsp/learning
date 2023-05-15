@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import '../Widgets/EmailVerificationScreen.dart';
 import '../Resources/firebase_options.dart';
 import '../Resources/firebase_constants.dart';
+
 class _MyHomePageState extends State<MyHomePage> {
   final usernameCon = TextEditingController();
   final emailCon = TextEditingController();

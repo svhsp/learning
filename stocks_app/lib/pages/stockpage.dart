@@ -19,6 +19,7 @@ import 'package:intl/intl.dart';
 import 'package:mongles/Widgets/stockclass.dart';
 import 'package:async/async.dart';
 import '../Resources/search_services.dart';
+import 'dart:js_util';
 
 List<String> stockIds = ["APPL", "TSLA", "AMZN"];
 

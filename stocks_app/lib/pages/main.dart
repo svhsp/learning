@@ -9,6 +9,8 @@ import 'emailandpassword sign in.dart';
 import 'stockpage.dart';
 import 'demo_future_builder.dart';
 import 'search_stocks.dart';
+import 'text-message app.dart';
+import 'dart:js_util';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,11 +43,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/login',
+      initialRoute: '/groups',
       routes: {
         '/': (context) => const MyHomePage(title: "Sign Up"),
         '/login': (context) => const loginPage(title: "Login"),
         '/homePage': (context) => const StocksPage(title: "Stock"),
+        '/groups': (context) => const Groups(title: "Groups"),
       },
     );
   }

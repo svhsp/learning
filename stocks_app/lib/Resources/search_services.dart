@@ -36,7 +36,7 @@ class SearchStock extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    final List<String> foundStock = stocks.where(
+    final List<String> foundStock = this.suggestedStocks.where(
           (stock) => stock.toLowerCase().contains(
         query.toLowerCase(),
       ),
@@ -56,7 +56,7 @@ class SearchStock extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    final List<String> searchedSuggestedLocations = suggestedStocks.where(
+    final List<String> searchedSuggestedLocations = this.stocks.where(
           (suggestedStock) => suggestedStock.toLowerCase().contains(
         query.toLowerCase(),
       ),
