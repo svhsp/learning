@@ -1,3 +1,8 @@
+import 'package:bosnia/pages/messaging_add_group_screen.dart';
+import 'package:bosnia/pages/messaging_group_screen.dart';
+import 'package:bosnia/pages/messaging_groups_screen.dart';
+import 'package:bosnia/pages/messaging_login_screen.dart';
+import 'package:bosnia/pages/messaging_signup_screen.dart';
 import 'package:bosnia/pages/search_stock_list_screen.dart';
 import 'package:bosnia/pages/stock_signup_screen.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +33,14 @@ class MyApp extends StatelessWidget {
         /* BAY AREA SEARCH ROUTES
         '/': (context) => const BayAreaSearch(),
         */
+        /* STOCK SEARCH ROUTES
         '/': (context) => const StockSearch(),
+        */
+        '/': (context) => const LoginPage(),
+        '/signUp': (context) => const SignUpPage(),
+        '/groups': (context) => const GroupsListPage(),
+        '/group': (context) => const GroupPage(),
+        '/add' : (context) => const AddGroupPage(),
       },
     );
   }
