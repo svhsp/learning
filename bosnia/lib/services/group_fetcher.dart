@@ -29,7 +29,7 @@ class GroupFetcher {
         DateTime time =  DateTime.parse(docSnapshot2.data()["datetime"].toDate().toString());
         String email = docSnapshot2.data()["email"];
         String message = docSnapshot2.data()["value"];
-        messageList.insert(0, Message(messageEmail: email, messageDateTime: time, messageValue: message));
+        messageList.add(Message(messageEmail: email, messageDateTime: time, messageValue: message));
       }
       Groups.add(Group(id: docSnapshot.id, name: docSnapshot.data()["name"], messages: messageList));
     }

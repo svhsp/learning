@@ -27,17 +27,25 @@ class _GroupPageState extends State<GroupPage> {
     return date.hour/12 < 1 ? "AM" : "PM";
   }
 
+  String time (DateTime date) {
+    if ("${date.minute}".length != 2) {
+      return "${date.hour%12}:0${date.minute}";
+    } else {
+      return "${date.hour%12}:${date.minute}";
+    }
+  }
+
   String getDateTimeDiff(DateTime date) {
-    if ((DateTime.now().difference(date).inDays).abs() < 1) {
+    if ((DateTime.now().difference(date).inDays).abs() != 0) {
       print("${DateTime.now().day}:${date.day}");
-      return "Today at ${date.hour%12}:${date.minute} ${AMPMFormat(date)}";
+      return "Today at ${time(date)} ${AMPMFormat(date)}";
     }
     if ((DateTime.now().difference(date).inDays).abs() < 2) {
       print("${DateTime.now().day}:${date.day}");
-      return "Yesterday at ${date.hour%12}:${date.minute} ${AMPMFormat(date)}";
+      return "Yesterday at ${time(date)} ${AMPMFormat(date)}";
     } else {
       print("${DateTime.now().day}:${date.day}");
-      return "${date.month}/${date.day}/${date.year} ${date.hour%12}:${date.minute} ${AMPMFormat(date)}";
+      return "${date.month}/${date.day}/${date.year} ${time(date)} ${AMPMFormat(date)}";
     }
   }
 
@@ -46,8 +54,7 @@ class _GroupPageState extends State<GroupPage> {
     _messageTextController.clear();
     print(selectedGroup.id);
     Timestamp currTime = Timestamp.now();
-    db.collection(selectedGroup.id).add(
-    {
+    db.collection(selectedGroup.id).doc("message-${selectedGroup.messages.length}").set({
       "datetime" : currTime,
       "email" : email,
       "value" : messageValue,
