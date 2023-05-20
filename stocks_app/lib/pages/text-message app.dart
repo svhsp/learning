@@ -32,7 +32,7 @@ class _GroupsState extends State<Groups> {
         if (data != null){
           if (data != {}){
             interpretedMessages.add(data);
-          }x
+          }
         }
       } catch (e){
         DateTime currentPhoneDate = DateTime.now();

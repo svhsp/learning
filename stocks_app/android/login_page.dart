@@ -272,7 +272,7 @@ class _loginPageState extends State<loginPage> {
                               .then(
                                   (querySnapshot) {
                                 Navigator.pushNamed(
-                                    context, '/groups');
+                                    context, '/homePage');
                               }
                           );
                         },
@@ -285,7 +285,7 @@ class _loginPageState extends State<loginPage> {
                     ),
                     ElevatedButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/login');
+                          Navigator.pushNamed(context, '/');
                         },
                         child: const Text('Sign up'),
                         style: ElevatedButton.styleFrom(
